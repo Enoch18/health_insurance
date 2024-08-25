@@ -1,20 +1,18 @@
 <?php
 
-namespace App\Http\Controllers\Membership;
+namespace App\Http\Controllers\Financials;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-use Inertia\Inertia;
-
-class MembersController extends Controller
+class FinancialsController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return Inertia::render('Membership/Members');
+        //
     }
 
     /**
