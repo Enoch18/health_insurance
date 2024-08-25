@@ -8,7 +8,7 @@ import Dropdown from '@/Components/Dropdown';
 import DropdownLink from '@/Components/DropdownLink';
 
 import { SiAmazoncognito } from "react-icons/si";
-import { MdDashboard } from "react-icons/md";
+import { MdDashboard, MdLogout } from "react-icons/md";
 import { menuLinks } from '@/Constants/MenuLinks';
 
 interface Props {
@@ -36,7 +36,7 @@ export default function MainLayout({title, children} : PropsWithChildren<Props>)
 
             <div className="min-h-screen bg-gray-100 dark:bg-gray-900 flex flex-row">
 
-                <div className="dark:bg-gray-800 dark:bg-gradient-to-bl dark:from-gray-700/50 dark:via-transparent border-b border-gray-200 dark:border-gray-700 h-[100vh] w-[280px] p-2">
+                <div className="relative dark:bg-gray-800 dark:bg-gradient-to-bl dark:from-gray-700/50 dark:via-transparent border-b border-gray-200 dark:border-gray-700 h-[100vh] w-[280px] p-2">
                     <div className="bg-blue-500 p-3 rounded text-white flex flex-row items-center gap-3">
                         <div className='border w-14 h-14 flex flex-row items-center justify-center rounded-full'>
                             <SiAmazoncognito className='text-3xl' />
@@ -59,6 +59,11 @@ export default function MainLayout({title, children} : PropsWithChildren<Props>)
                             <p>{link.name}</p>
                         </div>
                     ))}
+
+                    <button onClick={logout} className='absolute bottom-2 right-2 left-2 mt-3 p-2 rounded text-white flex flex-row items-center gap-3 border border-gray-500'>
+                        <MdLogout className='text-2xl' />
+                        Logout
+                    </button>
                 </div>
 
                 <div className="flex flex-row flex-1">

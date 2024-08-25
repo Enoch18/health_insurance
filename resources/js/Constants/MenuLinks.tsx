@@ -1,8 +1,8 @@
 import React from 'react';
 import { MdOutlineCardMembership } from "react-icons/md";
-import { FaFileInvoice, FaFileAlt, FaFileSignature } from 'react-icons/fa';
-import { FaUserCog, FaUsers, FaClipboardList } from 'react-icons/fa';
-import { FaDollarSign, FaChartLine, FaBalanceScale } from 'react-icons/fa';
+import { FaFileSignature } from 'react-icons/fa';
+import { FaUserCog } from 'react-icons/fa';
+import { FaDollarSign } from 'react-icons/fa';
 
 export const menuLinks = [
     {icon: <MdOutlineCardMembership className='text-2xl' />, name: 'Membership', route: '/membership', submenu: []},
