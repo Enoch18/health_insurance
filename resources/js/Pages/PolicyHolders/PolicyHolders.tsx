@@ -39,7 +39,7 @@ const PolicyHolders = () => {
 
             <CustomTabs tabs={tabs} />
             
-            <Table headers={headers} rows={[]} paperClassName='mt-3' />
+            <Table headers={headers} rows={rows} paperClassName='mt-3' />
         </MainLayout>
     )
 }
