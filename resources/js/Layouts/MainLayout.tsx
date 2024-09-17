@@ -93,7 +93,7 @@ export default function MainLayout({title, children} : PropsWithChildren<Props>)
                             </div>
                         </div>
                         
-                        <main className='p-2'>{children}</main>
+                        <main className='p-3'>{children}</main>
                     </div>
                 </div>
             </div>

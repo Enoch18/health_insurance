@@ -7,6 +7,6 @@ import { FaDollarSign } from 'react-icons/fa';
 export const menuLinks = [
     {icon: <MdOutlineCardMembership className='text-2xl' />, name: 'Policy Holders', route: 'policy-holders.index', submenus: []},
     {icon: <FaFileSignature className='text-2xl' />, name: 'Claims', route: 'claims.index', submenus: []},
-    {icon: <FaDollarSign className='text-2xl' />, name: 'Financials & Reports', route: 'policy-holders.index', submenus: []},
-    {icon: <FaUserCog className='text-2xl' />, name: 'Administrations', route: 'policy-holders.index', submenus: []},
+    {icon: <FaDollarSign className='text-2xl' />, name: 'Premium Payments', route: 'premiums.index', submenus: []},
+    {icon: <FaUserCog className='text-2xl' />, name: 'Administrations', route: 'administrations.index', submenus: []},
 ]

@@ -1,20 +1,20 @@
 <?php
 
-namespace App\Http\Controllers\Administrations;
+namespace App\Http\Controllers\Financials;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use Inertia\Inertia;
 
-class AdministrationsController extends Controller
+class PremiumPaymentsController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return Inertia::render('Administrations/Administrations');
+        return Inertia::render('Financials/PremiumPayments');
     }
 
     /**

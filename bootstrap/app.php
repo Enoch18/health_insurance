@@ -12,6 +12,7 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
         then: function(){
             Route::middleware('web')->group(function(){
+                require base_path('routes/administrations.php');
                 require base_path('routes/policy_holders.php');
                 require base_path('routes/claims.php');
                 require base_path('routes/financials.php');
