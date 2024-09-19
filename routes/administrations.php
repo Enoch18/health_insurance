@@ -18,7 +18,9 @@ Route::prefix('/administrations')->middleware(['auth:sanctum', config('jetstream
     // Insurance types group
     Route::prefix('/insurance-types')->group(function(){
         Route::resource('/home', \App\Http\Controllers\Administrations\InsuranceManagement\InsuranceTypesController::class)->names([
-            'index' => 'insurance-types.index'
+            'index' => 'insurance-types.index',
+            'store' => 'insurance-types.store',
+            'update' => 'insurance-types.update',
         ]);
         Route::resource('/setups', \App\Http\Controllers\Administrations\InsuranceManagement\InsuranceTypesController::class)->names([
             'index' => 'insurance-types.show'

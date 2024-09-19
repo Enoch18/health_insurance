@@ -26,7 +26,18 @@ class InsuranceTypesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|unique:insurance_types',
+            'description' => 'nullable|sometimes|string',
+            'status' => 'required|string|in:active,inactive'
+        ]);
+
+        $insuranceType = new InsuranceType;
+        $insuranceType->insurance_number = $this->insuranceNumber();
+        $insuranceType->name = $request->name;
+        $insuranceType->description = $request->description;
+        $insuranceType->status = $request->status;
+        $insuranceType->save();
     }
 
     /**
@@ -47,7 +58,17 @@ class InsuranceTypesController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|unique:insurance_types,name,' . $id,
+            'description' => 'nullable|sometimes|string',
+            'status' => 'required|string|in:active,inactive'
+        ]);
+
+        $insuranceType = InsuranceType::find($id);
+        $insuranceType->name = $request->name;
+        $insuranceType->description = $request->description;
+        $insuranceType->status = $request->status;
+        $insuranceType->save();
     }
 
     /**
@@ -56,5 +77,18 @@ class InsuranceTypesController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    private function insuranceNumber()
+    {
+        // Generating the member number
+        $insurance_number = InsuranceType::all()->last();
+        $nextId = ($insurance_number === null ? 0 : $insurance_number->id) + 1;
+    
+        $suffix = str_pad($nextId, 4, '0', STR_PAD_LEFT);
+    
+        $insurance_number_id = 'IN'.$suffix;
+    
+        return $insurance_number_id;
     }
 }

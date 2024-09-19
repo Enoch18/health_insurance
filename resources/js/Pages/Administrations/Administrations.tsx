@@ -33,7 +33,7 @@ const Administrations = () => {
                 {links.map((item:any, index:number) => (
                     <Link href={item.route} className='flex flex-col items-center border rounded p-3 gap-2' key={index}>
                         {item.icon}
-                        <h4>{item.label}</h4>
+                        <h4 className='text-center'>{item.label}</h4>
                     </Link>
                 ))}
             </div>
