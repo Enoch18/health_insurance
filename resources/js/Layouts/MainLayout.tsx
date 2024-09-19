@@ -48,7 +48,7 @@ export default function MainLayout({title, children} : PropsWithChildren<Props>)
                     </div>
 
                     <Link href={route('dashboard')}>
-                        <button className='mt-3 bg-red-500 p-3 w-[100%] rounded dark:text-white flex flex-row items-center gap-3'>
+                        <button className='mt-3 bg-red-500 p-3 w-[100%] rounded text-white flex flex-row items-center gap-3'>
                             <MdDashboard className='text-2xl' />
                             <p>Dashboard</p>
                         </button>
