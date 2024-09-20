@@ -4,8 +4,9 @@ namespace App\Http\Controllers\Administrations;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
 use Inertia\Inertia;
+use App\Models\User;
+use App\Models\Administrations\Role;
 
 class UserManagementsController extends Controller
 {
@@ -14,7 +15,13 @@ class UserManagementsController extends Controller
      */
     public function index()
     {
-        return Inertia::render('Administrations/UserManagement');
+        $users = User::paginate(10);
+        $roles = Role::all();
+
+        return Inertia::render('Administrations/UserManagement', [
+            'users' => $users,
+            'roles' => $roles
+        ]);
     }
 
     /**
@@ -30,7 +37,12 @@ class UserManagementsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|string',
+            'email' => 'required|email|unique:users',
+            'role_id' => 'required|integer',
+            'password' => 'nullable|sometimes|string|min:8'
+        ]);
     }
 
     /**

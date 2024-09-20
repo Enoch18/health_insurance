@@ -9,7 +9,8 @@ Route::prefix('/administrations')->middleware(['auth:sanctum', config('jetstream
         'index' => 'administrations.index'
     ]);
     Route::resource('/users-management', UserManagementsController::class)->names([
-        'index' => 'users-management.index'
+        'index' => 'users-management.index',
+        'store' => 'users-management.store'
     ]);
     Route::resource('/roles-and-permissions', RolesAndPermissionsController::class)->names([
         'index' => 'roles-and-permissions.index'

@@ -58,7 +58,7 @@ const Table = ({paperClassName, headers, rows}: Props) => {
                 {rows.map((row:any, index:number) => (
                     <div className="bg-white dark:bg-gray-700 p-2 shadow rounded my-2" key={index}>
                         {headers.map((header:any, headerIndex:number) => (
-                            <div>
+                            <div key={headerIndex}>
                                 <div className="flex flex-row items-center py-1">
                                     <div className="flex flex-row flex-1 items-center">
                                         {header.label}
