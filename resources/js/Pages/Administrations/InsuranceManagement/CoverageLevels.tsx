@@ -48,7 +48,7 @@ const CoverageLevels = ({coverage_levels}:any) => {
                 </div>
             } />
 
-            <TopHeaderSection title="Coverage Levels" onBtnClick={() => {setOpen(true); setValues({}); setItemId('')}} />
+            <TopHeaderSection title="Coverage Levels" onBtnClick={() => {setOpen(true); setValues({}); setItemId(''); setIsEditing(false)}} />
 
             <div className="mt-3">
                 <Table

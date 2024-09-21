@@ -36,6 +36,10 @@ Route::prefix('/administrations')->middleware(['auth:sanctum', config('jetstream
             'index' => 'benefit-packages.index'
         ]);
 
+        Route::resource('/claim-categories', \App\Http\Controllers\Administrations\InsuranceManagement\ClaimCategoriesController::class)->names([
+            'index' => 'claim-categories.index'
+        ]);
+
         Route::resource('/coverage-age-ranges', \App\Http\Controllers\Administrations\InsuranceManagement\CoverageAgeRangesController::class)->names([
             'index' => 'coverage-age-ranges.index'
         ]);

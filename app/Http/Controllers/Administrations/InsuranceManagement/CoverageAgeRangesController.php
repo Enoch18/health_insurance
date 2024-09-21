@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Administrations\InsuranceManagement;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use App\Models\Administrations\CoverageAgeRange;
 
 class CoverageAgeRangesController extends Controller
 {
@@ -13,15 +14,10 @@ class CoverageAgeRangesController extends Controller
      */
     public function index()
     {
-        return Inertia::render('Administrations/InsuranceManagement/CoverageAgeRanges');
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        $coverage_age_ranges = CoverageAgeRange::paginate(10);
+        return Inertia::render('Administrations/InsuranceManagement/CoverageAgeRanges', [
+            'coverage_age_ranges' => $coverage_age_ranges
+        ]);
     }
 
     /**
@@ -29,23 +25,19 @@ class CoverageAgeRangesController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        $request->validate([
+            'insurance_type_id' => 'required|integer',
+            'min_age' => 'required|integer',
+            'max_age' => 'required|integer',
+            'description' => 'required|string',
+        ]);
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
+        $coverageAgeRange = new CoverageAgeRange;
+        $coverageAgeRange->insurance_type_id = $request->insurance_type_id;
+        $coverageAgeRange->min_age = $request->min_age;
+        $coverageAgeRange->max_age = $request->max_age;
+        $coverageAgeRange->description = $request->description;
+        $coverageAgeRange->save();
     }
 
     /**
@@ -53,14 +45,17 @@ class CoverageAgeRangesController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
-    }
+        $request->validate([
+            'insurance_type_id' => 'required|integer',
+            'min_age' => 'required|integer',
+            'max_age' => 'required|integer',
+            'description' => 'required|string',
+        ]);
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        $coverageAgeRange = CoverageAgeRange::find($id);
+        $coverageAgeRange->min_age = $request->min_age;
+        $coverageAgeRange->max_age = $request->max_age;
+        $coverageAgeRange->description = $request->description;
+        $coverageAgeRange->save();
     }
 }

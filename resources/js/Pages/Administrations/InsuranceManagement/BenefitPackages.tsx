@@ -6,10 +6,30 @@ import useRoute from "@/Hooks/useRoute";
 import { queryString } from "@/Helpers/helper";
 import Breadcrumbs from "@/Components/Common/Breadcrumbs";
 import Table from "@/Components/Common/Table";
+import { useAddEdit } from "@/Hooks/useAddEdit";
+import AddEditBenefitPackages from "@/Components/Administrations/AddEditBenefitPackages";
+import { FaEdit } from "react-icons/fa";
 
-const BenefitPackages = () => {
+const BenefitPackages = ({benefit_packages}:any) => {
     const route = useRoute();
 
+    const {
+        open, setOpen,
+        values, setValues,
+        setIsEditing,
+        is_editing,
+        setItemId,
+        submitting,
+        errors,
+        handleChange,
+        onSubmit
+    } = useAddEdit("/administrations/insurance-types/benefit-packages");
+
+    // Adding the insurance type id to the values that are being submitted
+    const insurance_type_id = queryString('setup_id');
+    values.insurance_type_id = insurance_type_id;
+
+    // Table headers
     const headers = [
         {id: 'code', label: 'Code'},
         {id: 'description', label: 'Description'},
@@ -28,14 +48,49 @@ const BenefitPackages = () => {
                 </div>
             } />
 
-            <TopHeaderSection title="Benefit Packages" />
+            <TopHeaderSection title="Benefit Packages" onBtnClick={() => {setOpen(true); setValues({}); setItemId(''); setIsEditing(false)}} />
 
             <div className="mt-3">
                 <Table
                     headers={headers}
-                    rows={[]}
+                    rows={benefit_packages?.data?.map((item:any) => (
+                        {
+                            code: item.code,
+                            description: item.description,
+                            status: item.status,
+                            action: (
+                                <div className='flex flex-row items-center gap-3'>
+                                    <button 
+                                        onClick={() => {
+                                            setOpen(true);
+                                            setItemId(item.id);
+                                            setValues({
+                                                description: item.description,
+                                                status: item.status,
+                                            });
+                                            setOpen(true); 
+                                            setIsEditing(true);
+                                        }} 
+                                        className='border p-1 rounded'>
+                                        <FaEdit className='text-green-500 text-xl' />
+                                    </button>
+                                </div>
+                            )
+                        }
+                    ))}
                 />
             </div>
+
+            <AddEditBenefitPackages 
+                open={open}
+                setOpen={setOpen} 
+                values={values}
+                handleChange={handleChange}
+                onSubmit={onSubmit}
+                is_editing={is_editing}
+                errors={errors}
+                submitting={submitting}
+            />
         </MainLayout>
     )
 }

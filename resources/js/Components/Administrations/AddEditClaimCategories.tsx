@@ -12,30 +12,22 @@ interface Props{
     is_editing: boolean;
     errors: any;
     submitting: boolean;
+    benefit_packages: any;
 }
 
-const AddEditCoverageLevels = ({open, setOpen, values, handleChange, onSubmit, is_editing, errors, submitting}: Props) => {
+const AddEditClaimCategories = ({open, setOpen, values, handleChange, onSubmit, is_editing, errors, submitting, benefit_packages}: Props) => {
 
     return (
         <CustomModal
             open={open}
             setOpen={setOpen}
         >
-            <h4 className="text-lg mb-2">{is_editing ? 'Edit Coverage Level' : 'Add Coverage level'}</h4><hr />
+            <h4 className="text-lg mb-2">{is_editing ? 'Edit Benefit Package' : 'Add Benefit Package'}</h4><hr />
 
             <form onSubmit={onSubmit}>
                 <CustomTextInput 
-                    id={'name'} 
-                    name="name" 
-                    label='Name' 
-                    setValue={handleChange} 
-                    value={values?.name} 
-                    error={errors?.name}
-                />
-
-                <CustomTextInput 
                     id={'description'} 
-                    name="description" 
+                    name="description"
                     label='Description' 
                     setValue={handleChange} 
                     value={values?.description} 
@@ -43,30 +35,15 @@ const AddEditCoverageLevels = ({open, setOpen, values, handleChange, onSubmit, i
                 />
 
                 <CustomSelectBox 
-                    id={'tier_level'} 
-                    name="tier_level" 
-                    label='Tier Level' 
-                    data={[
-                        {label: 'Tier 1', value: '1'},
-                        {label: 'Tier 2', value: '2'},
-                    ]} 
+                    id={'benefit_package_id'} 
+                    name="benefit_package_id" 
+                    label='Parent Benefit Package' 
+                    data={benefit_packages?.map((item:any) => (
+                        {label: item.description, value: item.id}
+                    ))} 
                     setValue={handleChange} 
-                    value={values?.tier_level} 
-                    error={errors.tier_level}
-                />
-
-                <CustomSelectBox 
-                    id={'policy_type'} 
-                    name="policy_type" 
-                    label='Policy Type' 
-                    data={[
-                        {label: 'Individual', value: 'individual'},
-                        {label: 'Corporate', value: 'corporate'},
-                        {label: 'Any', value: 'any'},
-                    ]} 
-                    setValue={handleChange} 
-                    value={values?.policy_type} 
-                    error={errors.policy_type}
+                    value={values?.benefit_package_id} 
+                    error={errors.benefit_package_id}
                 />
 
                 <CustomSelectBox 
@@ -90,4 +67,4 @@ const AddEditCoverageLevels = ({open, setOpen, values, handleChange, onSubmit, i
     )
 }
 
-export default AddEditCoverageLevels;
+export default AddEditClaimCategories;

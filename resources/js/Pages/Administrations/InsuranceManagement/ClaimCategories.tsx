@@ -7,10 +7,10 @@ import { queryString } from "@/Helpers/helper";
 import Breadcrumbs from "@/Components/Common/Breadcrumbs";
 import Table from "@/Components/Common/Table";
 import { useAddEdit } from "@/Hooks/useAddEdit";
-import AddEditPolicyYears from "@/Components/Administrations/AddEditPolicyYears";
+import AddEditClaimCategories from "@/Components/Administrations/AddEditClaimCategories";
 import { FaEdit } from "react-icons/fa";
 
-const PolicyLevels = ({policy_years}:any) => {
+const ClaimCategories = ({claim_categories, benefit_packages}:any) => {
     const route = useRoute();
 
     const {
@@ -23,35 +23,43 @@ const PolicyLevels = ({policy_years}:any) => {
         errors,
         handleChange,
         onSubmit
-    } = useAddEdit("/administrations/insurance-types/policy-years");
+    } = useAddEdit("/administrations/insurance-types/claim-categories");
 
+    // Adding the insurance type id to the values that are being submitted
     const insurance_type_id = queryString('setup_id');
     values.insurance_type_id = insurance_type_id;
 
+    // Table headers
     const headers = [
-        {id: 'year', label: 'Year'},
+        {id: 'code', label: 'Code'},
+        {id: 'description', label: 'Description'},
+        {id: 'parent_benefit_package', label: 'Parent Benefit'},
+        {id: 'status', label: 'Status'},
         {id: 'action', label: ''},
     ];
 
     return (
-        <MainLayout title="Insurance Setups | Policy Years">
+        <MainLayout title="Insurance Setups | Claim Categories">
             <Breadcrumbs title={
                 <div className='flex flex-row gap-1 items-center'>
                     <Link className='text-blue-500' href={route('administrations.index')}>Administrations</Link> {'>'}
                     <Link className='text-blue-500' href={route('insurance-types.index')}>Insurance Management</Link> {'>'}
                     <Link className='text-blue-500' href={`/administrations/insurance-types/setups/${queryString('setup_id')}`}>Insurance Setups</Link> {'>'}
-                    <h4>Policy Years</h4>
+                    <h4>Claim Categories</h4>
                 </div>
             } />
 
-            <TopHeaderSection title="Policy Years" onBtnClick={() => {setOpen(true); setValues({}); setItemId(''); setIsEditing(false)}} />
+            <TopHeaderSection title="Claim Categories" onBtnClick={() => {setOpen(true); setValues({}); setItemId(''); setIsEditing(false)}} />
 
             <div className="mt-3">
                 <Table
                     headers={headers}
-                    rows={policy_years?.data?.map((item:any) => (
+                    rows={claim_categories?.data?.map((item:any) => (
                         {
-                            year: item.year,
+                            code: item.code,
+                            description: item.description,
+                            parent_benefit_package: item?.benefit_package?.description,
+                            status: item.status,
                             action: (
                                 <div className='flex flex-row items-center gap-3'>
                                     <button 
@@ -59,7 +67,9 @@ const PolicyLevels = ({policy_years}:any) => {
                                             setOpen(true);
                                             setItemId(item.id);
                                             setValues({
-                                                year: item.year
+                                                description: item.description,
+                                                benefit_package_id: item.benefit_package_id,
+                                                status: item.status,
                                             });
                                             setOpen(true); 
                                             setIsEditing(true);
@@ -74,7 +84,7 @@ const PolicyLevels = ({policy_years}:any) => {
                 />
             </div>
 
-            <AddEditPolicyYears 
+            <AddEditClaimCategories 
                 open={open}
                 setOpen={setOpen} 
                 values={values}
@@ -83,9 +93,10 @@ const PolicyLevels = ({policy_years}:any) => {
                 is_editing={is_editing}
                 errors={errors}
                 submitting={submitting}
+                benefit_packages={benefit_packages}
             />
         </MainLayout>
     )
 }
 
-export default PolicyLevels;
+export default ClaimCategories;

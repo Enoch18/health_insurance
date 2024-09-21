@@ -11,10 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('policy_years', function (Blueprint $table) {
+        Schema::create('claim_categories', function (Blueprint $table) {
             $table->id();
             $table->foreignId('insurance_type_id')->constrained('insurance_types')->references('id')->cascadeOnUpdate()->cascadeOnDelete();
-            $table->integer('year');
+            $table->foreignId('benefit_package_id')->constrained('benefit_packages')->references('id')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->string('code');
+            $table->text('description');
+            $table->enum('status', ['active', 'inactive'])->default('active');
             $table->timestamps();
         });
     }
@@ -24,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('policy_years');
+        Schema::dropIfExists('claim_categories');
     }
 };
