@@ -25,17 +25,6 @@ return new class extends Migration
             ['name' => 'Insurance Agent', 'created_at' => now(), 'updated_at' => now()],
             ['name' => 'Claims Adjuster', 'created_at' => now(), 'updated_at' => now()]
         ]);
-
-        /*
-            Super Admin (highest privileges, including managing Admins)
-            Admin
-            Underwriter
-            Insurance Agent
-            Claims Adjuster
-            Customer Service Representative
-            Policyholder (customer, limited access)
-            Read-Only Roles (e.g., Auditor, Compliance Officer)
-        */
     }
 
     /**

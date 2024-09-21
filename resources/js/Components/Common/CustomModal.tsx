@@ -37,8 +37,8 @@ const CustomModal = ({open, setOpen, children}: Props) => {
     return (
         <Fragment>
             {open && (
-                <div className="fixed bg-[rgba(0,0,0,0.8)] top-0 bottom-0 left-0 right-0 flex items-center justify-center">
-                    <div ref={divRef} className="bg-white dark:bg-gray-600 p-3 max-w-[500px] w-[100%] rounded">
+                <div className="fixed bg-[rgba(0,0,0,0.7)] top-0 bottom-0 left-0 right-0 flex items-center justify-center">
+                    <div ref={divRef} className="bg-white dark:bg-gray-700 p-3 max-w-[500px] w-[100%] rounded">
                         {children}
                     </div>
                 </div>

@@ -11,9 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('permissions', function (Blueprint $table) {
+        Schema::create('policy_years', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->foreignId('coverage_level_id')->constrained('coverage_levels')->references('id')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->integer('year');
             $table->timestamps();
         });
     }
@@ -23,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('permissions');
+        Schema::dropIfExists('policy_years');
     }
 };

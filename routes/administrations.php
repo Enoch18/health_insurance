@@ -23,8 +23,33 @@ Route::prefix('/administrations')->middleware(['auth:sanctum', config('jetstream
             'store' => 'insurance-types.store',
             'update' => 'insurance-types.update',
         ]);
+
         Route::resource('/setups', \App\Http\Controllers\Administrations\InsuranceManagement\InsuranceTypesController::class)->names([
             'index' => 'insurance-types.show'
+        ]);
+
+        Route::resource('/benefit-limits', \App\Http\Controllers\Administrations\InsuranceManagement\BenefitLimitsController::class)->names([
+            'index' => 'benefit-limits.index'
+        ]);
+
+        Route::resource('/benefit-packages', \App\Http\Controllers\Administrations\InsuranceManagement\BenefitPackagesController::class)->names([
+            'index' => 'benefit-packages.index'
+        ]);
+
+        Route::resource('/coverage-age-ranges', \App\Http\Controllers\Administrations\InsuranceManagement\CoverageAgeRangesController::class)->names([
+            'index' => 'coverage-age-ranges.index'
+        ]);
+
+        Route::resource('/coverage-levels', \App\Http\Controllers\Administrations\InsuranceManagement\CoverageLevelsController::class)->names([
+            'index' => 'coverage-levels.index'
+        ]);
+
+        Route::resource('/policy-years', \App\Http\Controllers\Administrations\InsuranceManagement\PolicyYearsController::class)->names([
+            'index' => 'policy-years.index'
+        ]);
+
+        Route::resource('/premium-rates', \App\Http\Controllers\Administrations\InsuranceManagement\PremiumRatesController::class)->names([
+            'index' => 'premium-rates.index'
         ]);
     });
 });
