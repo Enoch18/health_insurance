@@ -48,6 +48,10 @@ Route::prefix('/administrations')->middleware(['auth:sanctum', config('jetstream
             'index' => 'coverage-levels.index'
         ]);
 
+        Route::resource('/coverage-periods', \App\Http\Controllers\Administrations\InsuranceManagement\CoveragePeriodsController::class)->names([
+            'index' => 'coverage-periods.index'
+        ]);
+
         Route::resource('/policy-years', \App\Http\Controllers\Administrations\InsuranceManagement\PolicyYearsController::class)->names([
             'index' => 'policy-years.index'
         ]);

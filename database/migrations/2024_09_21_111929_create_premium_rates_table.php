@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('coverage_level_id')->constrained('coverage_levels')->references('id')->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreignId('policy_year_id')->constrained('policy_years')->references('id')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('coverage_period_id')->constrained('coverage_periods')->references('id')->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreignId('coverage_age_range_id')->constrained('coverage_age_ranges')->references('id')->cascadeOnUpdate()->cascadeOnDelete();
             $table->decimal('individual_price', 10, 2);
             $table->decimal('corporate_price', 10, 2);

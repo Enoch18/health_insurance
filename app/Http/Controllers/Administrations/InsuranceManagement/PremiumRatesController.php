@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Administrations\InsuranceManagement;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use App\Models\Administrations\CoverageLevel;
 
 class PremiumRatesController extends Controller
 {
@@ -13,7 +14,10 @@ class PremiumRatesController extends Controller
      */
     public function index()
     {
-        return Inertia::render('Administrations/InsuranceManagement/PremiumRates');
+        $coverage_levels = CoverageLevel::all();
+        return Inertia::render('Administrations/InsuranceManagement/PremiumRates', [
+            'coverage_levels' => $coverage_levels
+        ]);
     }
 
     /**

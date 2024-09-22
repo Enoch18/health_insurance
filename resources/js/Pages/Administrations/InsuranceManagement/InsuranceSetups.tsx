@@ -4,7 +4,7 @@ import MainLayout from "@/Layouts/MainLayout";
 import { Link } from "@inertiajs/react";
 import useRoute from "@/Hooks/useRoute";
 import { FaDollarSign, FaGift, FaHourglassHalf, FaMedal, FaTags, FaTrophy, FaUserClock } from "react-icons/fa6";
-import { FaTachometerAlt } from "react-icons/fa";
+import { FaCalendarAlt, FaTachometerAlt } from "react-icons/fa";
 import { parsePageId } from "@/Helpers/helper";
 import Breadcrumbs from "@/Components/Common/Breadcrumbs";
 
@@ -17,6 +17,7 @@ const InsuranceSetups = ({insurance_type}:any) => {
         {label: 'Claim Categories', icon: <FaTags className='text-5xl' />, route: route('claim-categories.index', {setup_id: parsePageId()})},
         {label: 'Policy Years', icon: <FaHourglassHalf className='text-5xl' />, route: route('policy-years.index', {setup_id: parsePageId()})},
         {label: 'Coverage Age Ranges', icon: <FaUserClock className='text-5xl' />, route: route('coverage-age-ranges.index', {setup_id: parsePageId()})},
+        {label: 'Coverage Periods', icon: <FaCalendarAlt className='text-5xl' />, route: route('coverage-periods.index', {setup_id: parsePageId()})},
         {label: 'Premium Rates', icon: <FaDollarSign className='text-5xl' />, route: route('premium-rates.index', {setup_id: parsePageId()})},
         {label: 'Benefit Limits', icon: <FaTachometerAlt className='text-5xl' />, route: route('benefit-limits.index', {setup_id: parsePageId()})},
     ];
