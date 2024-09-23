@@ -27,7 +27,9 @@ Route::prefix('/administrations')->middleware(['auth:sanctum', config('jetstream
         Route::resource('/setups', \App\Http\Controllers\Administrations\InsuranceManagement\InsuranceTypesController::class)->names([
             'index' => 'insurance-types.show'
         ]);
+    });
 
+    Route::prefix('/insurance-types/{insurance_type_id}')->group(function(){
         Route::resource('/benefit-limits', \App\Http\Controllers\Administrations\InsuranceManagement\BenefitLimitsController::class)->names([
             'index' => 'benefit-limits.index'
         ]);

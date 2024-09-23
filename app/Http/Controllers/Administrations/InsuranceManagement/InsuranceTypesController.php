@@ -49,6 +49,7 @@ class InsuranceTypesController extends Controller
         $insurance_type = InsuranceType::find($id);
 
         return Inertia::render('Administrations/InsuranceManagement/InsuranceSetups', [
+            'insurance_type_id' => $id,
             'insurance_type' => $insurance_type
         ]);
     }

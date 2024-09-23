@@ -12,10 +12,11 @@ class PolicyYearsController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index($insurance_type_id)
     {
         $policy_years = PolicyYear::paginate(10);
         return Inertia::render('Administrations/InsuranceManagement/PolicyYears', [
+            'insurance_type_id' => $insurance_type_id,
             'policy_years' => $policy_years
         ]);
     }

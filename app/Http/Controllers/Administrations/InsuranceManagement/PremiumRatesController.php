@@ -12,10 +12,11 @@ class PremiumRatesController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index($insurance_type_id)
     {
         $coverage_levels = CoverageLevel::all();
         return Inertia::render('Administrations/InsuranceManagement/PremiumRates', [
+            'insurance_type_id' => $insurance_type_id,
             'coverage_levels' => $coverage_levels
         ]);
     }

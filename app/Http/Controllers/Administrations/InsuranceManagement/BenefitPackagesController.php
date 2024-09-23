@@ -12,10 +12,11 @@ class BenefitPackagesController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index($insurance_type_id)
     {
         $benefit_packages = BenefitPackage::paginate(10);
         return Inertia::render('Administrations/InsuranceManagement/BenefitPackages', [
+            'insurance_type_id' => $insurance_type_id,
             'benefit_packages' => $benefit_packages
         ]);
     }

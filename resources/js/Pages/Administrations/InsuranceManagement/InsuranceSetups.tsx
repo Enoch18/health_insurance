@@ -5,21 +5,20 @@ import { Link } from "@inertiajs/react";
 import useRoute from "@/Hooks/useRoute";
 import { FaDollarSign, FaGift, FaHourglassHalf, FaMedal, FaTags, FaTrophy, FaUserClock } from "react-icons/fa6";
 import { FaCalendarAlt, FaTachometerAlt } from "react-icons/fa";
-import { parsePageId } from "@/Helpers/helper";
 import Breadcrumbs from "@/Components/Common/Breadcrumbs";
 
-const InsuranceSetups = ({insurance_type}:any) => {
+const InsuranceSetups = ({insurance_type_id, insurance_type}:any) => {
     const route = useRoute();
 
     const links = [
-        {label: 'Coverage Levels', icon: <FaTrophy className='text-5xl' />, route: route('coverage-levels.index', {setup_id: parsePageId()})},
-        {label: 'Benefits Packages', icon: <FaGift className='text-5xl' />, route: route('benefit-packages.index', {setup_id: parsePageId()})},
-        {label: 'Claim Categories', icon: <FaTags className='text-5xl' />, route: route('claim-categories.index', {setup_id: parsePageId()})},
-        {label: 'Policy Years', icon: <FaHourglassHalf className='text-5xl' />, route: route('policy-years.index', {setup_id: parsePageId()})},
-        {label: 'Coverage Age Ranges', icon: <FaUserClock className='text-5xl' />, route: route('coverage-age-ranges.index', {setup_id: parsePageId()})},
-        {label: 'Coverage Periods', icon: <FaCalendarAlt className='text-5xl' />, route: route('coverage-periods.index', {setup_id: parsePageId()})},
-        {label: 'Premium Rates', icon: <FaDollarSign className='text-5xl' />, route: route('premium-rates.index', {setup_id: parsePageId()})},
-        {label: 'Benefit Limits', icon: <FaTachometerAlt className='text-5xl' />, route: route('benefit-limits.index', {setup_id: parsePageId()})},
+        {label: 'Coverage Levels', icon: <FaTrophy className='text-5xl' />, route: `/administrations/insurance-types/${insurance_type_id}/coverage-levels`},
+        {label: 'Benefits Packages', icon: <FaGift className='text-5xl' />, route: `/administrations/insurance-types/${insurance_type_id}/benefit-packages`},
+        {label: 'Claim Categories', icon: <FaTags className='text-5xl' />, route: `/administrations/insurance-types/${insurance_type_id}/claim-categories`},
+        {label: 'Policy Years', icon: <FaHourglassHalf className='text-5xl' />, route: `/administrations/insurance-types/${insurance_type_id}/policy-years`},
+        {label: 'Coverage Age Ranges', icon: <FaUserClock className='text-5xl' />, route: `/administrations/insurance-types/${insurance_type_id}/coverage-age-ranges`},
+        {label: 'Coverage Periods', icon: <FaCalendarAlt className='text-5xl' />, route: `/administrations/insurance-types/${insurance_type_id}/coverage-periods`},
+        {label: 'Premium Rates', icon: <FaDollarSign className='text-5xl' />, route: `/administrations/insurance-types/${insurance_type_id}/premium-rates`},
+        {label: 'Benefit Limits', icon: <FaTachometerAlt className='text-5xl' />, route: `/administrations/insurance-types/${insurance_type_id}/benefit-limits`},
     ];
 
     return (

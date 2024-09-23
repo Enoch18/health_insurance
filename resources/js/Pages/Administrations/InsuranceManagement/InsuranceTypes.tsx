@@ -9,7 +9,6 @@ import CustomModal from '@/Components/Common/CustomModal';
 import CustomTextInput from '@/Components/Common/CustomTextInput';
 import CustomSelectBox from '@/Components/Common/CustomSelectbox';
 import { router } from '@inertiajs/core';
-import Toast from '@/Components/Common/Toast';
 import { ToastContext } from '@/Contexts/ToastContext';
 
 const InsuranceTypes = ({insurance_types}:any) => {

@@ -3,14 +3,13 @@ import MainLayout from "@/Layouts/MainLayout";
 import TopHeaderSection from "@/Components/Common/TopHeaderSection";
 import { Link } from "@inertiajs/react";
 import useRoute from "@/Hooks/useRoute";
-import { queryString } from "@/Helpers/helper";
 import Breadcrumbs from "@/Components/Common/Breadcrumbs";
 import Table from "@/Components/Common/Table";
 import AddEditCoverageLevels from "@/Components/Administrations/AddEditCoverageLevels";
 import { FaEdit } from "react-icons/fa";
 import { useAddEdit } from "@/Hooks/useAddEdit";
 
-const CoverageLevels = ({coverage_levels}:any) => {
+const CoverageLevels = ({insurance_type_id, coverage_levels}:any) => {
     const route = useRoute();
     
     const {
@@ -24,7 +23,6 @@ const CoverageLevels = ({coverage_levels}:any) => {
         onSubmit
     } = useAddEdit("/administrations/insurance-types/coverage-levels");
 
-    const insurance_type_id = queryString('setup_id');
     values.insurance_type_id = insurance_type_id;
 
     const headers = [
@@ -43,7 +41,7 @@ const CoverageLevels = ({coverage_levels}:any) => {
                 <div className='flex flex-row gap-1 items-center'>
                     <Link className='text-blue-500' href={route('administrations.index')}>Administrations</Link> {'>'}
                     <Link className='text-blue-500' href={route('insurance-types.index')}>Insurance Management</Link> {'>'}
-                    <Link className='text-blue-500' href={`/administrations/insurance-types/setups/${queryString('setup_id')}`}>Insurance Setups</Link> {'>'}
+                    <Link className='text-blue-500' href={`/administrations/insurance-types/setups/${insurance_type_id}`}>Insurance Setups</Link> {'>'}
                     <h4>Coverage Levels</h4>
                 </div>
             } />

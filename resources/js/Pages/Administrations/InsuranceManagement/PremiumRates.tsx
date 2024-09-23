@@ -3,11 +3,10 @@ import MainLayout from "@/Layouts/MainLayout";
 import TopHeaderSection from "@/Components/Common/TopHeaderSection";
 import { Link } from "@inertiajs/react";
 import useRoute from "@/Hooks/useRoute";
-import { queryString } from "@/Helpers/helper";
 import Breadcrumbs from "@/Components/Common/Breadcrumbs";
 import { FaFolder } from "react-icons/fa6";
 
-const PremiumRates = ({coverage_levels}:any) => {
+const PremiumRates = ({insurance_type_id, coverage_levels}:any) => {
     const route = useRoute();
 
     return (
@@ -16,7 +15,7 @@ const PremiumRates = ({coverage_levels}:any) => {
                 <div className='flex flex-row gap-1 items-center'>
                     <Link className='text-blue-500' href={route('administrations.index')}>Administrations</Link> {'>'}
                     <Link className='text-blue-500' href={route('insurance-types.index')}>Insurance Management</Link> {'>'}
-                    <Link className='text-blue-500' href={`/administrations/insurance-types/setups/${queryString('setup_id')}`}>Insurance Setups</Link> {'>'}
+                    <Link className='text-blue-500' href={`/administrations/insurance-types/setups/${insurance_type_id}`}>Insurance Setups</Link> {'>'}
                     <h4>Premium Rates</h4>
                 </div>
             } />

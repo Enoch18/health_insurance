@@ -12,10 +12,11 @@ class CoverageAgeRangesController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index($insurance_type_id)
     {
         $coverage_age_ranges = CoverageAgeRange::paginate(10);
         return Inertia::render('Administrations/InsuranceManagement/CoverageAgeRanges', [
+            'insurance_type_id' => $insurance_type_id,
             'coverage_age_ranges' => $coverage_age_ranges
         ]);
     }
