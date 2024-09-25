@@ -22,7 +22,7 @@ const ClaimCategories = ({insurance_type_id, claim_categories, benefit_packages}
         errors,
         handleChange,
         onSubmit
-    } = useAddEdit("/administrations/insurance-types/claim-categories");
+    } = useAddEdit(`/administrations/insurance-types/${insurance_type_id}/claim-categories`);
 
     // Adding the insurance type id to the values that are being submitted
     values.insurance_type_id = insurance_type_id;

@@ -1,19 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import MainLayout from "@/Layouts/MainLayout"
 import { Link } from '@inertiajs/react';
 import useRoute from '@/Hooks/useRoute';
 import TopHeaderSection from '@/Components/Common/TopHeaderSection';
 import Table from '@/Components/Common/Table';
 import LimitAmountInputField from '@/Components/Administrations/LimitAmountInputField';
+import Loader from '@/Components/Common/Loader';
 
 const CoverageLevelBenefitLimits = ({benefit_packages, insurance_type_id, coverage_level}: any) => {
     const route = useRoute();
+    const [submitting, setSubmitting] = useState(false);
 
     const headers = [
         {id: 'code', label: 'Code'},
         {id: 'description', label: 'Description'},
         {id: 'currency', label: 'Currency'},
         {id: 'limitAmount', label: 'Limit Amount'},
+        {id: 'loader', label: ''},
     ];
 
     return (
@@ -35,7 +38,16 @@ const CoverageLevelBenefitLimits = ({benefit_packages, insurance_type_id, covera
                         code: item.code,
                         description: item.description,
                         currency: 'USD',
-                        limitAmount: <LimitAmountInputField id={item.id} />
+                        limitAmount: (
+                            <LimitAmountInputField 
+                                benefit_package_id={item.benefit_package_id} 
+                                coverage_level_id={item.coverage_level_id} 
+                                insurance_type_id={insurance_type_id} 
+                                defaultLimitAmount={item.limit_amount} 
+                                setSubmitting={setSubmitting}
+                            />
+                        ),
+                        loader: <span>{submitting && <Loader />}</span>
                     }
                 ))}
             />

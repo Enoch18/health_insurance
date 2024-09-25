@@ -22,7 +22,7 @@ const BenefitPackages = ({insurance_type_id, benefit_packages}:any) => {
         errors,
         handleChange,
         onSubmit
-    } = useAddEdit("/administrations/insurance-types/benefit-packages");
+    } = useAddEdit(`/administrations/insurance-types/${insurance_type_id}/benefit-packages`);
 
     // Adding the insurance type id to the values that are being submitted
     values.insurance_type_id = insurance_type_id;

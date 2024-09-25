@@ -33,6 +33,7 @@ Route::prefix('/administrations')->middleware(['auth:sanctum', config('jetstream
         Route::resource('/benefit-limits', \App\Http\Controllers\Administrations\InsuranceManagement\BenefitLimitsController::class)->names([
             'index' => 'benefit-limits.index'
         ]);
+        Route::post('/add-coverage-level-benefit-limit', [\App\Http\Controllers\Administrations\InsuranceManagement\BenefitLimitsController::class, 'addCoverageLevelBenefitLimit']);
 
         Route::resource('/benefit-packages', \App\Http\Controllers\Administrations\InsuranceManagement\BenefitPackagesController::class)->names([
             'index' => 'benefit-packages.index'

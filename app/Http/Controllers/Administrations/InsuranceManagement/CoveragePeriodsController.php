@@ -14,7 +14,7 @@ class CoveragePeriodsController extends Controller
      */
     public function index($insurance_type_id)
     {
-        $coverage_periods = CoveragePeriod::paginate(10);
+        $coverage_periods = CoveragePeriod::orderBy('number_of_months', 'DESC')->paginate(10);
         return Inertia::render('Administrations/InsuranceManagement/CoveragePeriods', [
             'insurance_type_id' => $insurance_type_id,
             'coverage_levels' => $coverage_periods

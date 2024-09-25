@@ -34,7 +34,8 @@ class BenefitLimitsController extends Controller
         $benefitPackages = $packages->map(function($item) use($coverage_level_id){
             $limit = BenefitLimit::where('benefit_package_id', '=', $item->id)->where('coverage_level_id', '=', $coverage_level_id)->first();
             return collect([
-                'id' => $item->id,
+                'benefit_package_id' => $item->id,
+                'coverage_level_id' => $coverage_level_id,
                 'code' => $item->code,
                 'description' => $item->description,
                 'status' => $item->status,
@@ -47,5 +48,31 @@ class BenefitLimitsController extends Controller
             'insurance_type_id' => $insurance_type_id,
             'coverage_level' => $coverage_level
         ]);
+    }
+
+    /**
+     * Setting benefit limits for a coverage level
+     */
+    public function addCoverageLevelBenefitLimit(Request $request, $insurance_type_id){
+        $request->validate([
+            'coverage_level_id' => 'required|integer',
+            'benefit_package_id' => 'required|integer',
+            'limit_amount' => 'required|numeric'
+        ]);
+
+        //Checking if the limit exists
+        $benefit_limit = BenefitLimit::where('coverage_level_id', '=', $request->coverage_level_id)->where('benefit_package_id', '=', $request->benefit_package_id)->first();
+
+        //If the limit doesn't exist, a new one is created
+        if(!$benefit_limit){
+            $benefit_limit = new BenefitLimit;
+        }
+
+        //Saving the limit
+        $benefit_limit->coverage_level_id = $request->coverage_level_id;
+        $benefit_limit->benefit_package_id = $request->benefit_package_id;
+        $benefit_limit->limit_amount = $request->limit_amount;
+        $benefit_limit->notes = "Active benefit";
+        $benefit_limit->save();
     }
 }

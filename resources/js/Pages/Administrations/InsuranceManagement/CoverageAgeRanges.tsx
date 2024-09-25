@@ -22,7 +22,7 @@ const CoverageAgeRanges = ({insurance_type_id, coverage_age_ranges}:any) => {
         errors,
         handleChange,
         onSubmit
-    } = useAddEdit("/administrations/insurance-types/coverage-age-ranges");
+    } = useAddEdit(`/administrations/insurance-types/${insurance_type_id}/coverage-age-ranges`);
 
     // Adding the insurance type id to the values that are being submitted
     values.insurance_type_id = insurance_type_id;

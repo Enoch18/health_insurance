@@ -14,7 +14,7 @@ class PolicyYearsController extends Controller
      */
     public function index($insurance_type_id)
     {
-        $policy_years = PolicyYear::paginate(10);
+        $policy_years = PolicyYear::orderBy('year', 'DESC')->paginate(10);
         return Inertia::render('Administrations/InsuranceManagement/PolicyYears', [
             'insurance_type_id' => $insurance_type_id,
             'policy_years' => $policy_years
@@ -28,7 +28,7 @@ class PolicyYearsController extends Controller
     {
         $request->validate([
             'insurance_type_id' => 'required|integer',
-            'year' => 'required|integer',
+            'year' => 'required|integer|unique:policy_years',
         ]);
 
         $policyYear = new PolicyYear;

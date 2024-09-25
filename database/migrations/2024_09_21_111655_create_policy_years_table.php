@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('policy_years', function (Blueprint $table) {
             $table->id();
             $table->foreignId('insurance_type_id')->constrained('insurance_types')->references('id')->cascadeOnUpdate()->cascadeOnDelete();
-            $table->integer('year');
+            $table->integer('year')->unique();
             $table->timestamps();
         });
     }

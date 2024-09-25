@@ -21,7 +21,7 @@ const CoverageLevels = ({insurance_type_id, coverage_levels}:any) => {
         errors,
         handleChange,
         onSubmit
-    } = useAddEdit("/administrations/insurance-types/coverage-levels");
+    } = useAddEdit(`/administrations/insurance-types/${insurance_type_id}/coverage-levels`);
 
     values.insurance_type_id = insurance_type_id;
 

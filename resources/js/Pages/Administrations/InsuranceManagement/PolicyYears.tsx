@@ -22,7 +22,7 @@ const PolicyLevels = ({insurance_type_id, policy_years}:any) => {
         errors,
         handleChange,
         onSubmit
-    } = useAddEdit("/administrations/insurance-types/policy-years");
+    } = useAddEdit(`/administrations/insurance-types/${insurance_type_id}/policy-years`);
 
     values.insurance_type_id = insurance_type_id;
 
