@@ -26,16 +26,21 @@
     "vite": "^3.2.10"
   },
   "dependencies": {
+    "@emotion/react": "^11.13.3",
+    "@emotion/styled": "^11.13.0",
     "@headlessui/react": "^1.7.19",
     "@inertiajs/core": "^1.2.0",
     "@inertiajs/react": "^1.2.0",
     "@inertiajs/server": "^0.1.0",
+    "@mui/material": "^6.1.1",
+    "@mui/x-charts": "^7.18.0",
     "classnames": "^2.5.1",
     "lodash": "^4.17.21",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-icons": "^5.3.0",
     "react-loader-spinner": "^6.1.6",
+    "recharts": "^2.12.7",
     "ziggy-js": "^1.8.2"
   },
   "prettier": {
