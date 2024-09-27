@@ -17,7 +17,7 @@ const InsuranceSetups = ({insurance_type_id, insurance_type}:any) => {
         {label: 'Policy Years', icon: <FaHourglassHalf className='text-5xl' />, route: `/administrations/insurance-types/${insurance_type_id}/policy-years`},
         {label: 'Coverage Age Ranges', icon: <FaUserClock className='text-5xl' />, route: `/administrations/insurance-types/${insurance_type_id}/coverage-age-ranges`},
         {label: 'Coverage Periods', icon: <FaCalendarAlt className='text-5xl' />, route: `/administrations/insurance-types/${insurance_type_id}/coverage-periods`},
-        {label: 'Premium Rates', icon: <FaDollarSign className='text-5xl' />, route: `/administrations/insurance-types/${insurance_type_id}/premium-rates`},
+        {label: 'Premium Rates', icon: <FaDollarSign className='text-5xl' />, route: `/administrations/insurance-types/${insurance_type_id}/years`},
         {label: 'Benefit Limits', icon: <FaTachometerAlt className='text-5xl' />, route: `/administrations/insurance-types/${insurance_type_id}/benefit-limits`},
     ];
 

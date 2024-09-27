@@ -59,8 +59,12 @@ Route::prefix('/administrations')->middleware(['auth:sanctum', config('jetstream
             'index' => 'policy-years.index'
         ]);
 
-        Route::resource('/premium-rates', \App\Http\Controllers\Administrations\InsuranceManagement\PremiumRatesController::class)->names([
-            'index' => 'premium-rates.index'
-        ]);
+
+        Route::get('/years', [\App\Http\Controllers\Administrations\InsuranceManagement\PremiumRatesController::class, 'premiumYearsOptions']);
+        Route::get('/years/{year_id}/premium-coverage-levels', [\App\Http\Controllers\Administrations\InsuranceManagement\PremiumRatesController::class, 'premiumCoverageLevels']);
+        Route::get('/years/{year_id}/premium-coverage-levels/{coverage_level_id}', [\App\Http\Controllers\Administrations\InsuranceManagement\PremiumRatesController::class, 'index']);
+        // Route::resource('/years/{year_id}/premium-coverage-levels/{coverage_level_id}', \App\Http\Controllers\Administrations\InsuranceManagement\PremiumRatesController::class)->names([
+        //     'index' => 'premium-rates.index'
+        // ]);
     });
 });
