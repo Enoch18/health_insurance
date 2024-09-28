@@ -72,14 +72,6 @@ class InsuranceTypesController extends Controller
         $insuranceType->save();
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
-
     private function insuranceNumber()
     {
         // Generating the member number

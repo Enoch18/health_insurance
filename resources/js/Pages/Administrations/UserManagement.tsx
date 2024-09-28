@@ -10,6 +10,7 @@ import CustomTextInput from '@/Components/Common/CustomTextInput';
 import CustomSelectBox from '@/Components/Common/CustomSelectbox';
 import { router } from '@inertiajs/core';
 import useRoute from '@/Hooks/useRoute';
+import Breadcrumbs from '@/Components/Common/Breadcrumbs';
 
 const UserManagement = ({users, roles}: any) => {
     const [open, setOpen] = useState(false);
@@ -58,6 +59,13 @@ const UserManagement = ({users, roles}: any) => {
 
     return (
         <MainLayout title="User Management">
+            <Breadcrumbs title={
+                <div className='flex flex-row gap-1 items-center'>
+                    <Link className='text-blue-500' href={route('administrations.index')}>Administrations</Link> {'>'}
+                    <h4>User Management</h4>
+                </div>
+            } />
+
             <TopHeaderSection title='User Management' onBtnClick={() => setOpen(true)} />
 
             <Table

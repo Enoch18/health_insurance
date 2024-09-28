@@ -116,7 +116,7 @@ export default function MainLayout({title, children} : PropsWithChildren<Props>)
                 )}
 
                 <div className="flex flex-row flex-1">
-                    <div className='dark:dark:text-white w-[100%]'>
+                    <div className='dark:dark:text-white w-[100%] h-[100vh] overflow-hidden'>
                         <div className='flex flex-row pt-2 pl-3 pr-3 justify-end border-b-2 border-b-red-500'>
                             <div className='flex flex-row flex-1 items-center'>
                                 <button onClick={() => setSideBarOpen(!sideBarOpen)}>
@@ -141,7 +141,7 @@ export default function MainLayout({title, children} : PropsWithChildren<Props>)
                             </div>
                         </div>
                         
-                        <main className='p-3'>{children}</main>
+                        <main className='p-3 h-[100vh] overflow-scroll'>{children}<br /><br /></main>
                     </div>
                 </div>
             </div>

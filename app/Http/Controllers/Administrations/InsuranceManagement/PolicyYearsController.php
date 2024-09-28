@@ -14,7 +14,7 @@ class PolicyYearsController extends Controller
      */
     public function index($insurance_type_id)
     {
-        $policy_years = PolicyYear::orderBy('year', 'DESC')->paginate(10);
+        $policy_years = PolicyYear::where('insurance_type_id', '=', $insurance_type_id)->orderBy('year', 'DESC')->paginate(10);
         return Inertia::render('Administrations/InsuranceManagement/PolicyYears', [
             'insurance_type_id' => $insurance_type_id,
             'policy_years' => $policy_years
@@ -24,7 +24,7 @@ class PolicyYearsController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, string $insurance_type_id)
     {
         $request->validate([
             'insurance_type_id' => 'required|integer',
@@ -40,7 +40,7 @@ class PolicyYearsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, string $insurance_type_id, string $id)
     {
         $request->validate([
             'insurance_type_id' => 'required|integer',

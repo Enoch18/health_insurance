@@ -14,7 +14,7 @@ class BenefitPackagesController extends Controller
      */
     public function index($insurance_type_id)
     {
-        $benefit_packages = BenefitPackage::paginate(10);
+        $benefit_packages = BenefitPackage::where('insurance_type_id', '=', $insurance_type_id)->paginate(10);
         return Inertia::render('Administrations/InsuranceManagement/BenefitPackages', [
             'insurance_type_id' => $insurance_type_id,
             'benefit_packages' => $benefit_packages
@@ -24,7 +24,7 @@ class BenefitPackagesController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, $insurance_type_id)
     {
         $request->validate([
             'insurance_type_id' => 'required|integer',
@@ -43,7 +43,7 @@ class BenefitPackagesController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, string $insurance_type_id, string $id)
     {
         $request->validate([
             'insurance_type_id' => 'required|integer',

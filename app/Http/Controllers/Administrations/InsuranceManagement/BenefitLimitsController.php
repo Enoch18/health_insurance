@@ -16,7 +16,7 @@ class BenefitLimitsController extends Controller
      */
     public function index($insurance_type_id)
     {
-        $coverage_levels = CoverageLevel::all();
+        $coverage_levels = CoverageLevel::where('insurance_type_id', '=', $insurance_type_id)->get();
         return Inertia::render('Administrations/InsuranceManagement/BenefitLimits', [
             'insurance_type_id' => $insurance_type_id,
             'coverage_levels' => $coverage_levels

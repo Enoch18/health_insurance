@@ -5,6 +5,7 @@ import { Link } from "@inertiajs/react";
 import useRoute from "@/Hooks/useRoute";
 import Breadcrumbs from "@/Components/Common/Breadcrumbs";
 import Table from "@/Components/Common/Table";
+import PremiumRatesInputSubmitField from "@/Components/Administrations/PremiumRatesInputSubmitField";
 
 const PremiumRates = ({insurance_type_id, coverage_level_id, year_id, year, rates, coverage_level}:any) => {
     const route = useRoute();
@@ -39,7 +40,43 @@ const PremiumRates = ({insurance_type_id, coverage_level_id, year_id, year, rate
                             headers={headers}
                             rows={item.rates.map((rate:any) => (
                                 {
-                                    ageRange: `${rate.min_age} - ${rate.max_age} Years`
+                                    ageRange: `${rate.min_age} - ${rate.max_age} Years`,
+                                    individualPrice: (
+                                        <PremiumRatesInputSubmitField 
+                                            coverage_level_id={coverage_level_id}
+                                            policy_year_id={year_id}
+                                            coverage_period_id={item.coverage_period_id}
+                                            coverage_age_range_id={rate.age_range_id}
+                                            insurance_type_id={insurance_type_id}
+                                            defaultLimitAmount={rate.individual_price}
+                                            value_type="individual_price"
+                                        />
+                                    ),
+                                    corporatePrice: (
+                                        <PremiumRatesInputSubmitField 
+                                            coverage_level_id={coverage_level_id}
+                                            policy_year_id={year_id}
+                                            coverage_period_id={item.coverage_period_id}
+                                            coverage_age_range_id={rate.age_range_id}
+                                            insurance_type_id={insurance_type_id}
+                                            defaultLimitAmount={rate.corporate_price}
+                                            value_type="corporate_price"
+                                        />
+                                    ),
+                                    taxPercentage: (
+                                        <div className="flex flex-row items-center gap-1">
+                                            <PremiumRatesInputSubmitField 
+                                                coverage_level_id={coverage_level_id}
+                                                policy_year_id={year_id}
+                                                coverage_period_id={item.coverage_period_id}
+                                                coverage_age_range_id={rate.age_range_id}
+                                                insurance_type_id={insurance_type_id}
+                                                defaultLimitAmount={rate.tax_percentage}
+                                                value_type="tax_percentage"
+                                            />
+                                            %
+                                        </div>
+                                    )
                                 }
                             ))}
                         />

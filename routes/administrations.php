@@ -12,8 +12,16 @@ Route::prefix('/administrations')->middleware(['auth:sanctum', config('jetstream
         'index' => 'users-management.index',
         'store' => 'users-management.store'
     ]);
-    Route::resource('/roles-and-permissions', RolesAndPermissionsController::class)->names([
-        'index' => 'roles-and-permissions.index'
+    Route::resource('/roles', SystemUserRolesController::class)->names([
+        'index' => 'roles.index'
+    ]);
+
+    Route::get('/role-permissions/{role_id}', [SystemRolePermissions::class, 'index'])->name('permissions.index');
+    Route::post('/role-permissions', [SystemRolePermissions::class, 'store']);
+    Route::get('/role-permission-roles', [SystemRolePermissions::class, 'permissionRoles'])->name('permission.roles');
+    
+    Route::resource('/audit-logs', AuditLogsController::class)->names([
+        'index' => 'audit-logs.index'
     ]);
 
     // Insurance types group
@@ -63,6 +71,7 @@ Route::prefix('/administrations')->middleware(['auth:sanctum', config('jetstream
         Route::get('/years', [\App\Http\Controllers\Administrations\InsuranceManagement\PremiumRatesController::class, 'premiumYearsOptions']);
         Route::get('/years/{year_id}/premium-coverage-levels', [\App\Http\Controllers\Administrations\InsuranceManagement\PremiumRatesController::class, 'premiumCoverageLevels']);
         Route::get('/years/{year_id}/premium-coverage-levels/{coverage_level_id}', [\App\Http\Controllers\Administrations\InsuranceManagement\PremiumRatesController::class, 'index']);
+        Route::post('/premium-rates', [\App\Http\Controllers\Administrations\InsuranceManagement\PremiumRatesController::class, 'store']);
         // Route::resource('/years/{year_id}/premium-coverage-levels/{coverage_level_id}', \App\Http\Controllers\Administrations\InsuranceManagement\PremiumRatesController::class)->names([
         //     'index' => 'premium-rates.index'
         // ]);

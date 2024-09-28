@@ -15,8 +15,8 @@ class ClaimCategoriesController extends Controller
      */
     public function index($insurance_type_id)
     {
-        $claim_categories = ClaimCategory::with('benefitPackage')->paginate(10);
-        $benefit_packages = BenefitPackage::all();
+        $claim_categories = ClaimCategory::with('benefitPackage')->where('insurance_type_id', '=', $insurance_type_id)->paginate(10);
+        $benefit_packages = BenefitPackage::where('insurance_type_id', '=', $insurance_type_id)->get();
         return Inertia::render('Administrations/InsuranceManagement/ClaimCategories', [
             'insurance_type_id' => $insurance_type_id,
             'claim_categories' => $claim_categories,
@@ -27,7 +27,7 @@ class ClaimCategoriesController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, string $insurance_type_id)
     {
         $request->validate([
             'insurance_type_id' => 'required|integer',
@@ -48,7 +48,7 @@ class ClaimCategoriesController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, string $insurance_type_id, string $id)
     {
         $request->validate([
             'insurance_type_id' => 'required|integer',

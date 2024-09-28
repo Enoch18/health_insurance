@@ -17,8 +17,8 @@ return new class extends Migration
             $table->foreignId('policy_year_id')->constrained('policy_years')->references('id')->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreignId('coverage_period_id')->constrained('coverage_periods')->references('id')->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreignId('coverage_age_range_id')->constrained('coverage_age_ranges')->references('id')->cascadeOnUpdate()->cascadeOnDelete();
-            $table->decimal('individual_price', 10, 2);
-            $table->decimal('corporate_price', 10, 2);
+            $table->decimal('individual_price', 10, 2)->nullable();
+            $table->decimal('corporate_price', 10, 2)->nullable();
             $table->double('tax_percentage')->nullable();
             $table->decimal('tax_amount', 10, 2)->nullable();
             $table->timestamps();

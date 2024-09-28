@@ -14,7 +14,7 @@ class CoverageLevelsController extends Controller
      */
     public function index($insurance_type_id)
     {
-        $coverage_levels = CoverageLevel::paginate(10);
+        $coverage_levels = CoverageLevel::where('insurance_type_id', '=', $insurance_type_id)->paginate(10);
         return Inertia::render('Administrations/InsuranceManagement/CoverageLevels', [
             'insurance_type_id' => $insurance_type_id,
             'coverage_levels' => $coverage_levels
@@ -24,7 +24,7 @@ class CoverageLevelsController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, $insurance_type_id)
     {
         $request->validate([
             'insurance_type_id' => 'required|integer',
@@ -49,7 +49,7 @@ class CoverageLevelsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, string $insurance_type_id, string $id)
     {
         $request->validate([
             'insurance_type_id' => 'required|integer',

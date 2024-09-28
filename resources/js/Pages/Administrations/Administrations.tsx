@@ -5,6 +5,7 @@ import { FaBell, FaBriefcase, FaClipboardList, FaEnvelope, FaFolderOpen, FaHeads
 import { FaBalanceScale, FaCogs } from 'react-icons/fa';
 import useRoute from '@/Hooks/useRoute';
 import { Link } from '@inertiajs/react';
+import { MdLockOutline } from 'react-icons/md';
 
 const Administrations = () => {
 
@@ -12,15 +13,16 @@ const Administrations = () => {
 
     const links = [
         {label: 'User Management', icon: <FaUsers className='text-5xl' />, route: route('users-management.index')},
-        {label: 'Role & Permissions', icon: <FaUserShield className='text-5xl' />, route: route('roles-and-permissions.index')},
+        {label: 'System User Roles', icon: <FaUserShield className='text-5xl' />, route: route('roles.index')},
+        {label: 'System Role Permissions', icon: <MdLockOutline className='text-5xl' />, route: route('permission.roles')},
         {label: 'Insurance Management', icon: <FaBriefcase className='text-5xl' />, route: route('insurance-types.index')},
-        {label: 'System Settings', icon: <FaCogs className='text-5xl' />, route: route('users-management.index')},
-        {label: 'Audit Logs', icon: <FaClipboardList className='text-5xl' />, route: route('users-management.index')},
-        {label: 'Notifications & Alerts', icon: <FaBell className='text-5xl' />, route: route('users-management.index')},
-        {label: 'Document Management', icon: <FaFolderOpen className='text-5xl' />, route: route('users-management.index')},
-        {label: 'Audit & Compliance', icon: <FaBalanceScale className='text-5xl' />, route: route('users-management.index')},
-        {label: 'Email Management', icon: <FaEnvelope className='text-5xl' />, route: route('users-management.index')},
-        {label: 'Support & Helpdesk', icon: <FaHeadset className='text-5xl' />, route: route('users-management.index')}
+        {label: 'System Settings', icon: <FaCogs className='text-5xl' />, route: '#'},
+        {label: 'Audit Logs', icon: <FaClipboardList className='text-5xl' />, route: route('audit-logs.index')},
+        {label: 'Notifications & Alerts', icon: <FaBell className='text-5xl' />, route: '#'},
+        {label: 'Document Management', icon: <FaFolderOpen className='text-5xl' />, route: '#'},
+        {label: 'Audit & Compliance', icon: <FaBalanceScale className='text-5xl' />, route: '#'},
+        {label: 'Email Management', icon: <FaEnvelope className='text-5xl' />, route: '#'},
+        {label: 'Support & Helpdesk', icon: <FaHeadset className='text-5xl' />, route: '#'}
     ];
 
     return (
