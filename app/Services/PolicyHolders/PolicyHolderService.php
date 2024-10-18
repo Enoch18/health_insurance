@@ -55,6 +55,8 @@ class PolicyHolderService{
 
             // Saving the coverage service
             $this->policyHolderCoverageService->createPolicyLevelCoverage($policyHolder, $request);
+
+            return $policyHolder;
         }catch(Exception $e){
             \Log::error('An error occurred: ' . $e->getMessage());
             throw new Exception('An error occurred while trying to save policy holder ' . $e->getMessage());

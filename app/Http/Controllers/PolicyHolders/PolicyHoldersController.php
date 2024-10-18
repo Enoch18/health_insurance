@@ -27,7 +27,7 @@ class PolicyHoldersController extends Controller
      */
     public function index()
     {
-        $policy_holders = PolicyHolder::orderBy('created_at', 'DESC')->paginate(25);
+        $policy_holders = PolicyHolder::orderBy('created_at', 'DESC')->paginate(10);
         return Inertia::render('PolicyHolders/PolicyHolders', [
             'policy_holders' => PolicyHoldersResource::collection($policy_holders)
         ]);
@@ -55,7 +55,8 @@ class PolicyHoldersController extends Controller
     public function store(PolicyHoldersRequest $request)
     {
         try{
-            $this->policyHolderService->createPolicyHolder($request, null);
+            $policyHolder = $this->policyHolderService->createPolicyHolder($request, null);
+            return redirect("/policy-holders/$policyHolder->id/dependants/create");
         }catch(Exception $e){
             $coverage_periods = CoveragePeriod::where('insurance_type_id', '=', 1)->get();
             $insurance_types = InsuranceType::get();

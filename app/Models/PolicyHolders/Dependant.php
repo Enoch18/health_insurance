@@ -5,6 +5,7 @@ namespace App\Models\PolicyHolders;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Dependant extends Model
 {
@@ -16,5 +17,9 @@ class Dependant extends Model
 
     public function medicals(): MorphMany{
         return  $this->morphMany(MedicalInformation::class, 'medicable');
+    }
+
+    public function policyHolder(): BelongsTo{
+        return  $this->belongsTo(PolicyHolder::class, 'policy_holder_id');
     }
 }

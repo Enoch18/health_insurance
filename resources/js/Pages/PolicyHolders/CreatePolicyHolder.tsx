@@ -27,8 +27,8 @@ const CreatePolicyHolder = ({coverage_periods, insurance_types, coverage_levels}
         e.preventDefault();
 
         router.post(`/policy-holders`, values, {
-            onSuccess: () => {
-                router.visit('/policy-holders');
+            onSuccess: (data) => {
+                console.log(data);
             }
         });
     }

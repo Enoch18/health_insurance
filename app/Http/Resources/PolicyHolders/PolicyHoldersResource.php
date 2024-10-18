@@ -43,7 +43,8 @@ class PolicyHoldersResource extends JsonResource
                 'policy_status' => $this->policy_status,
                 'created_at' => $this->created_at->format('d M Y'),
                 'updated_at' => $this->updated_at
-            ]
+            ],
+            'dependants' => $this->whenLoaded('dependants')
         ];
     }
 }
