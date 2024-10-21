@@ -21,8 +21,6 @@ return new class extends Migration
             $table->string('physician_phone')->nullable();
             $table->string('physician_email')->nullable();
             $table->date('last_checkup_date')->nullable();
-            $table->text('allergies')->nullable();
-            $table->text('medications')->nullable();
             $table->timestamps();
         });
     }

@@ -1,7 +1,7 @@
 import TopHeaderSection from "@/Components/Common/TopHeaderSection";
-import Paper from "@/Components/Paper";
+import MedicalInformationFormContainer from "@/Components/PolicyHolders/MedicalInformationForm";
 import MainLayout from "@/Layouts/MainLayout";
-import React from "react";
+import React, { useState } from "react";
 
 interface Props{
     policy_holder: any;
@@ -9,16 +9,21 @@ interface Props{
 
 const CreateMedicalInformation = ({policy_holder}: Props) => {
     policy_holder = policy_holder?.data;
+    const [dependantIndex, setDependantIndex] = useState(-1);
 
     return (
         <MainLayout title="Create Medicals">
             <TopHeaderSection title='Add Medicals' hideAddBtn={true} />
 
-            <Paper>
-                <h4 className="text-lg font-semibold"><span className="text-orange-500">{policy_holder.attributes.first_name} {policy_holder.attributes.last_name}</span> {'>'} Dependants</h4><hr className="border-gray-500" />
-
-                
-            </Paper>
+            <MedicalInformationFormContainer
+                name={`${policy_holder?.attributes.first_name} ${policy_holder?.attributes.last_name}`}
+                individual_type="Policy Holder"
+                id_type={dependantIndex > -1 ? "dependant" : "policy_holder"}
+                id={dependantIndex > -1 ? policy_holder?.dependants[dependantIndex].id : policy_holder.id}
+                dependants={policy_holder?.dependants}
+                dependantIndex={dependantIndex}
+                setDependantIndex={setDependantIndex}
+            />
         </MainLayout>
     )
 }
