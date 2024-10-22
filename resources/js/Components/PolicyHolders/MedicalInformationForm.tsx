@@ -1,12 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import Paper from "../Paper";
-import { usePage } from "@inertiajs/react";
 import CustomTextInput from "../Common/CustomTextInput";
 import CustomSelectBox from "../Common/CustomSelectbox";
 import { FaCheckCircle } from "react-icons/fa";
 import CustomModal from "../Common/CustomModal";
 import * as Yup from 'yup';
-import { useFormik } from "formik";
 
 interface MedicalProps{
     name: string;
@@ -85,21 +83,40 @@ const MedicalInformationForm = ({name, individual_type, id_type, id, dependants,
 
     const nextMedicalInformation = () => {
         let maxIndex = dependants.length - 1;
-        let nextIndex = dependantIndex + 1;
-        
-        if(nextIndex <= maxIndex){
-            setDependantIndex(dependantIndex + 1);
+
+        if(id_type === 'policy_holder'){
+            setDependantIndex(0);
             setMedicalConditions((currentValues:any): any => {
                 return [...currentValues, values];
             });
-        }else{
-            setIsCompleting(false);
+        }
+        
+        if(id_type === 'dependant'){
+            if(dependantIndex <= maxIndex){
+                let index = dependants.length === 1 ? 0 : dependantIndex + 1;
+                setDependantIndex(index);
+                setMedicalConditions((currentValues:any): any => {
+                    return [...currentValues, values];
+                });
+            }else{
+                setIsCompleting(true);
+            }
+        }
+
+        if(maxIndex === -1){
+            setIsCompleting(true);
         }
 
         setNoMedicalCondition(false);
 
+        formRef.current?.reset();
+
+        setValues({});
+
         setOpen(false);
     }
+
+    console.log(id_type, medical_conditions)
 
     return (
         <div className="mt-3">
