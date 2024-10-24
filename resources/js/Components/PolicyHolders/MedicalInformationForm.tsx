@@ -47,11 +47,21 @@ const MedicalInformationForm = ({name, individual_type, id_type, id, dependants,
 
     useEffect(() => {
         if(id_type === "dependant"){
-            setValues((values:any) => ({...values, dependant_id: id}));
+            if(no_medical_condition){
+                setValues((values:any) => ({...values, dependant_id: id, no_medical_condition}));
+                setErrors({});
+            }else{
+                setValues((values:any) => ({...values, dependant_id: id}));
+            }
         }else{
-            setValues((values:any) => ({...values, policy_holder_id: id}));
+            if(no_medical_condition){
+                setValues((values:any) => ({...values, policy_holder_id: id, no_medical_condition}));
+                setErrors({});
+            }else{
+                setValues((values:any) => ({...values, policy_holder_id: id}));
+            }
         }
-    }, [dependantIndex]);
+    }, [dependantIndex, no_medical_condition]);
 
     const validateForm = async() => {
         try {
@@ -98,8 +108,10 @@ const MedicalInformationForm = ({name, individual_type, id_type, id, dependants,
                 setMedicalConditions((currentValues:any): any => {
                     return [...currentValues, values];
                 });
-            }else{
-                setIsCompleting(true);
+
+                if(index === maxIndex){
+                    setIsCompleting(true);
+                }
             }
         }
 
@@ -115,8 +127,6 @@ const MedicalInformationForm = ({name, individual_type, id_type, id, dependants,
 
         setOpen(false);
     }
-
-    console.log(id_type, medical_conditions)
 
     return (
         <div className="mt-3">
@@ -147,6 +157,7 @@ const MedicalInformationForm = ({name, individual_type, id_type, id, dependants,
                                 setValue={handleChange} 
                                 value={values?.condition} 
                                 error={errors?.condition}
+                                disabled={no_medical_condition}
                             />
                             <CustomTextInput 
                                 id={'last_checkup_date'} 
@@ -156,6 +167,7 @@ const MedicalInformationForm = ({name, individual_type, id_type, id, dependants,
                                 setValue={handleChange} 
                                 value={values?.last_checkup_date} 
                                 error={errors?.last_checkup_date}
+                                disabled={no_medical_condition}
                             />
                             <CustomTextInput 
                                 id={'primary_physican'} 
@@ -165,6 +177,7 @@ const MedicalInformationForm = ({name, individual_type, id_type, id, dependants,
                                 setValue={handleChange} 
                                 value={values?.primary_physican} 
                                 error={errors?.primary_physican}
+                                disabled={no_medical_condition}
                             />
                             <CustomTextInput 
                                 id={'physician_phone_number'} 
@@ -174,6 +187,7 @@ const MedicalInformationForm = ({name, individual_type, id_type, id, dependants,
                                 setValue={handleChange} 
                                 value={values?.physician_phone_number} 
                                 error={errors?.physician_phone_number}
+                                disabled={no_medical_condition}
                             />
 
                             <CustomTextInput 
@@ -184,6 +198,7 @@ const MedicalInformationForm = ({name, individual_type, id_type, id, dependants,
                                 setValue={handleChange} 
                                 value={values?.physician_email} 
                                 error={errors?.physician_email}
+                                disabled={no_medical_condition}
                             />
                             <CustomTextInput 
                                 id={'notes'} 
@@ -193,6 +208,7 @@ const MedicalInformationForm = ({name, individual_type, id_type, id, dependants,
                                 setValue={handleChange} 
                                 value={values?.notes} 
                                 error={errors?.notes}
+                                disabled={no_medical_condition}
                             />
                             <CustomSelectBox 
                                 id={'status'} 

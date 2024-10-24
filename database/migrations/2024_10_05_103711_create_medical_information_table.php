@@ -15,12 +15,12 @@ return new class extends Migration
             $table->id();
             $table->morphs('medicable'); 
             $table->text('condition')->nullable();
-            $table->boolean('is_pre_existing_condition');
             $table->text('medical_history_notes')->nullable();
             $table->string('primary_physician')->nullable();
             $table->string('physician_phone')->nullable();
             $table->string('physician_email')->nullable();
             $table->date('last_checkup_date')->nullable();
+            $table->string('status')->default('current');
             $table->timestamps();
         });
     }
