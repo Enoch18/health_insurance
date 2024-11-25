@@ -41,7 +41,8 @@ const PolicyHolderLayout = ({policy_holder, children}: Props) => {
                     <Link href={`/policy-holders/${policy_holder.id}`} className={`border-x border-t rounded-t border-x-gray-500 border-t-gray-500 px-5 py-2 ${!url.split('/policy-holders/')[1].includes('/') ? 'bg-blue-600' : ''}`}>Policy Holder</Link>
                     <Link href={`/policy-holders/${policy_holder.id}/dependants`} className={`border-x border-t rounded-t border-x-gray-500 border-t-gray-500 px-5 py-2 ${url.includes('dependants')  ? 'bg-blue-600' : ''}`}>Dependants</Link>
                     <Link href={`/policy-holders/${policy_holder.id}/medical-information`} className={`border-x border-t rounded-t border-x-gray-500 border-t-gray-500 px-5 py-2 ${url.includes('medical-information')  ? 'bg-blue-600' : ''}`}>Medical Information</Link>
-                    <Link href={`/policy-holders/${policy_holder.id}/financials`} className={`border-x border-t rounded-t border-x-gray-500 border-t-gray-500 px-5 py-2 ${url.includes('financials')  ? 'bg-blue-600' : ''}`}>Financials Information</Link>
+                    {/* <Link href={`/policy-holders/${policy_holder.id}/financials`} className={`border-x border-t rounded-t border-x-gray-500 border-t-gray-500 px-5 py-2 ${url.includes('financials')  ? 'bg-blue-600' : ''}`}>Financials Information</Link> */}
+                    <Link href={`/policy-holders/${policy_holder.id}/underwriting`} className={`border-x border-t rounded-t border-x-gray-500 border-t-gray-500 px-5 py-2 ${url.includes('underwriting')  ? 'bg-blue-600' : ''}`}>Underwriting</Link>
                     <Link href={`/policy-holders/${policy_holder.id}/policy-holder-benefits`} className={`border-x border-t rounded-t border-x-gray-500 border-t-gray-500 px-5 py-2 ${url.includes('policy-holder-benefits')  ? 'bg-blue-600' : ''}`}>Policy Benefits</Link>
                 </div>
 

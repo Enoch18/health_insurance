@@ -17,7 +17,7 @@ class DependantsController extends Controller
      */
     public function index(string $policy_holder_id)
     {
-        $policy_holder = PolicyHolder::find($policy_holder_id);
+        $policy_holder = PolicyHolder::with(['dependants'])->find($policy_holder_id);
         return Inertia::render('PolicyHolders/Dependants', [
             'policy_holder' => new PolicyHoldersResource($policy_holder)
         ]);

@@ -1,4 +1,5 @@
 import React from "react";
+import TextInput from "../TextInput";
 
 interface TabProps{
     label: string;
@@ -6,17 +7,28 @@ interface TabProps{
 }
 
 interface Props{
-    tabs: TabProps[]
+    tabs: TabProps[];
+    defaultValue?: string;
 }
 
-const CustomTabs = ({tabs}: Props) => {
+const CustomTabs = ({tabs, defaultValue}: Props) => {
     return (
-        <div className='grid grid-cols-2 md:grid-cols-6 gap-2 bg-gray-300 dark:bg-gray-700 p-1 overflow-x-scroll'>
-            {tabs.map((items:TabProps, index:number) => (
-                <button className={`min-w-[110px] border rounded py-1 px-5`} key={index}>
-                    {items.label}
-                </button>
-            ))}
+        <div className="flex flex-row mt-2">
+            <div className="w-[300px]">
+                <TextInput 
+                    className="w-[100%] h-10"
+                    placeholder="Search by Policy #"
+                />
+            </div>
+
+            <div className="flex flex-row flex-1 justify-end">
+                <select className="text-black w-[200px] rounded text-center h-10" defaultValue={defaultValue ?? ''}>
+                    <option value={""}>--Filter By--</option>
+                    {tabs.map((item:any, index: number) => (
+                        <option key={index} value={item.value}>{item.label}</option>
+                    ))}
+                </select>
+            </div>
         </div>
     )
 }

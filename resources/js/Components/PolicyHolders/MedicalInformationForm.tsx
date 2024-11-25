@@ -5,6 +5,7 @@ import CustomSelectBox from "../Common/CustomSelectbox";
 import { FaCheckCircle } from "react-icons/fa";
 import CustomModal from "../Common/CustomModal";
 import * as Yup from 'yup';
+import { router } from "@inertiajs/core";
 
 interface MedicalProps{
     name: string;
@@ -61,7 +62,7 @@ const MedicalInformationForm = ({name, individual_type, id_type, id, dependants,
                 setValues((values:any) => ({...values, policy_holder_id: id}));
             }
         }
-    }, [dependantIndex, no_medical_condition]);
+    }, [dependantIndex, no_medical_condition, medical_conditions?.length]);
 
     const validateForm = async() => {
         try {
@@ -111,6 +112,7 @@ const MedicalInformationForm = ({name, individual_type, id_type, id, dependants,
 
                 if(index === maxIndex){
                     setIsCompleting(true);
+                    router.visit(`/policy-holders/21/medical-information/create`);
                 }
             }
         }
@@ -127,6 +129,28 @@ const MedicalInformationForm = ({name, individual_type, id_type, id, dependants,
 
         setOpen(false);
     }
+
+    const addAnotherCondition = () => {
+        if(id_type === 'policy_holder'){
+            setMedicalConditions((currentValues:any): any => {
+                return [...currentValues, values];
+            });
+        }
+        
+        if(id_type === 'dependant'){
+            setMedicalConditions((currentValues:any): any => {
+                return [...currentValues, values];
+            });
+        }
+
+        formRef.current?.reset();
+
+        setValues({});
+
+        setOpen(false);
+    }
+
+    console.log(medical_conditions)
 
     return (
         <div className="mt-3">
@@ -252,11 +276,7 @@ const MedicalInformationForm = ({name, individual_type, id_type, id, dependants,
                     
                     <div className="flex flex-row gap-3 mt-3">
                         <button 
-                            onClick={() => {
-                                setOpen(false);
-                                setValues({});
-                                formRef.current.reset();
-                            }} 
+                            onClick={addAnotherCondition} 
                             className="bg-green-500 px-2 py-1 min-w-40 rounded"
                         >
                             Yes

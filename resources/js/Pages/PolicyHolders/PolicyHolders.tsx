@@ -6,17 +6,18 @@ import Table from '@/Components/Common/Table';
 import { FaEye } from 'react-icons/fa';
 import useRoute from '@/Hooks/useRoute';
 import { Link } from '@inertiajs/react';
+import { FaPlus } from 'react-icons/fa6';
 
 const PolicyHolders = ({policy_holders}: any) => {
     const route = useRoute();
 
     const tabs = [
-        {label: 'All'},
-        {label: 'Active'},
-        {label: 'Suspended'},
-        {label: 'Inactive'},
-        {label: '15 Days To Renewal'},
-        {label: '45 Days To Renewal'},
+        {value: "all", label: 'All'},
+        {value: "active", label: 'Active'},
+        {value: "suspended", label: 'Suspended'},
+        {value: "inactive", label: 'Inactive'},
+        {value: "15_days_to_renewal", label: '15 Days To Renewal'},
+        {value: "45_days_to_renewal", label: '45 Days To Renewal'},
     ];
 
     const headers = [
@@ -35,9 +36,18 @@ const PolicyHolders = ({policy_holders}: any) => {
         <MainLayout 
             title="Policy Holders"
         >
-            <TopHeaderSection title='Policy Holders' route_to={route('policy-holders.create')} />
+            <TopHeaderSection title='Policy Holders' route_to={route('policy-holders.create')} hideAddBtn={true} />
 
-            <CustomTabs tabs={tabs} />
+            <div className='flex flex-row items-center gap-2'>
+                <div className='flex-row flex-1'>
+                    <CustomTabs tabs={tabs} defaultValue='all' />
+                </div>
+
+                <Link href={route('policy-holders.create')} className='px-5 bg-blue-500 text-white rounded flex flex-row items-center gap-1 h-10 mt-1'>
+                    <FaPlus />
+                    Add New
+                </Link>
+            </div>
             
             <Table 
                 headers={headers} 
