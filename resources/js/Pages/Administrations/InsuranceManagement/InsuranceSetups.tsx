@@ -4,7 +4,7 @@ import MainLayout from "@/Layouts/MainLayout";
 import { Link } from "@inertiajs/react";
 import useRoute from "@/Hooks/useRoute";
 import { FaDollarSign, FaGift, FaHourglassHalf, FaMedal, FaTags, FaTrophy, FaUserClock } from "react-icons/fa6";
-import { FaCalendarAlt, FaTachometerAlt } from "react-icons/fa";
+import { FaCalendarAlt, FaTachometerAlt, FaTools } from "react-icons/fa";
 import Breadcrumbs from "@/Components/Common/Breadcrumbs";
 
 const InsuranceSetups = ({insurance_type_id, insurance_type}:any) => {
@@ -18,6 +18,7 @@ const InsuranceSetups = ({insurance_type_id, insurance_type}:any) => {
         {label: 'Coverage Age Ranges', icon: <FaUserClock className='text-5xl' />, route: `/administrations/insurance-types/${insurance_type_id}/coverage-age-ranges`},
         {label: 'Coverage Periods', icon: <FaCalendarAlt className='text-5xl' />, route: `/administrations/insurance-types/${insurance_type_id}/coverage-periods`},
         {label: 'Premium Rates', icon: <FaDollarSign className='text-5xl' />, route: `/administrations/insurance-types/${insurance_type_id}/years`},
+        {label: 'Services', icon: <FaTools className='text-5xl' />, route: `/administrations/insurance-types/${insurance_type_id}/services`},
         {label: 'Benefit Limits', icon: <FaTachometerAlt className='text-5xl' />, route: `/administrations/insurance-types/${insurance_type_id}/benefit-limits`},
     ];
 
@@ -33,7 +34,7 @@ const InsuranceSetups = ({insurance_type_id, insurance_type}:any) => {
 
             <TopHeaderSection title={insurance_type.name} hideAddBtn={true} />
 
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 mt-3">
+            <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 mt-3">
                 {links.map((item:any, index:number) => (
                     <Link href={item.route} className='flex flex-col items-center border rounded p-3 gap-2' key={index}>
                         {item.icon}

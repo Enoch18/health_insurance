@@ -15,4 +15,8 @@ class BenefitPackage extends Model implements Auditable
     public function claimCategories() : HasMany {
         return $this->hasMany(ClaimCategory::class, 'benefit_package_id');
     }
+
+    public function services(){
+        return $this->hasMany(Service::class, 'benefit_package_id');
+    }
 }

@@ -4,15 +4,16 @@ import TopHeaderSection from '@/Components/Common/TopHeaderSection';
 import CustomTabs from '@/Components/Common/CustomTabs';
 import Table from '@/Components/Common/Table';
 import { FaEye } from 'react-icons/fa';
+import { Link } from '@inertiajs/react';
+import { FaArrowRight } from 'react-icons/fa6';
 
 const Claims = () => {
     const tabs = [
-        {label: 'All'},
-        {label: 'Submitted'},
-        {label: 'Approved'},
-        {label: 'Rejected'},
-        {label: 'Processing'},
-        {label: 'Paid'},
+        {value: 'all', label: 'All'},
+        {value: 'pending', label: 'Pending'},
+        {value: 'approved', label: 'Approved'},
+        {value: 'rejected', label: 'Rejected'},
+        {value: 'paid', label: 'Paid'}
     ];
 
     const headers = [
@@ -29,18 +30,22 @@ const Claims = () => {
     ];
 
     const rows = [
-        {claim_number: '7872342', policy_holder: 'Enock D Soko', policy_number: '9898345', claim_type: 'Out Patient', claim_date: '10 Sep 2024', claim_amount: '$10', amount_approved: '$10', submission_method: 'Online', status: 'Approved', action: <button><FaEye /></button>}
+        {claim_number: '7872342', policy_holder: 'Enock D Soko', policy_number: '9898345', claim_type: 'Out Patient', claim_date: '10 Sep 2024', claim_amount: '$10', amount_approved: '$10', submission_method: 'Online', status: 'Approved', action: (<div className='flex flex-row items-center gap-3'><Link href={`/claims-management/claims/1`} className='border p-1 rounded'><FaEye className='text-xl text-blue-500' /></Link></div>)}
     ]
 
     return (
         <MainLayout 
-            title="Policy Holders"
+            title="Claims"
         >
-            <TopHeaderSection title='Claims' />
+            <TopHeaderSection title='Claims' route_to='/claims-management/claims/create' />
 
-            <CustomTabs tabs={tabs} />
+            <CustomTabs tabs={tabs} defaultValue='all' />
             
-            <Table headers={headers} rows={rows} paperClassName='mt-3' />
+            <Table 
+                headers={headers} 
+                rows={rows} 
+                paperClassName='mt-3' 
+            />
         </MainLayout>
     )
 }

@@ -1,19 +1,18 @@
 <?php
 
-namespace App\Http\Controllers\Claims;
+namespace App\Http\Controllers\Administrations;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Inertia\Inertia;
 
-class ClaimsController extends Controller
+class ServicesController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return Inertia::render('Claims/Claims');
+        //
     }
 
     /**
@@ -21,7 +20,7 @@ class ClaimsController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Claims/CreateClaim');
+        //
     }
 
     /**
@@ -37,7 +36,7 @@ class ClaimsController extends Controller
      */
     public function show(string $id)
     {
-        return Inertia::render('Claims/ShowClaim');
+        //
     }
 
     /**
