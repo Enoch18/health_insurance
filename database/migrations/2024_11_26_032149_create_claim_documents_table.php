@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('claim_documents', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('claim_id')->constrained('claims')->references('id')->cascadeOnUpdate()->cascadeOnDelete();
             $table->string('document_name')->nullable();
             $table->string('path');
             $table->timestamps();

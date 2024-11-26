@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('claim_services', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('claim_id')->constrained('claims')->references('id')->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreignId('service_id')->constrained('services')->references('id')->cascadeOnUpdate()->cascadeOnDelete();
-            $table->foreignId('benefit_package_id')->constrained('benefit_packages')->references('id')->cascadeOnUpdate()->cascadeOnDelete();
             $table->decimal('claim_amount', 10, 2);
             $table->timestamps();
         });

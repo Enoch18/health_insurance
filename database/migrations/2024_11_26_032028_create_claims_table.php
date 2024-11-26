@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('claims', function (Blueprint $table) {
             $table->id();
             $table->foreignId('policy_holder_id')->constrained('policy_holders')->references('id')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->string('claim_number');
             $table->string('service_provider');
             $table->date('claim_date');
             $table->decimal('total_claimed_amount', 10, 2);

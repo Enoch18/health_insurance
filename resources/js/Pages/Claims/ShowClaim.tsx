@@ -2,7 +2,7 @@ import React from "react"
 import MainLayout from "@/Layouts/MainLayout"
 import TopHeaderSection from "@/Components/Common/TopHeaderSection";
 
-const ShowClaim = () => {
+const ShowClaim = ({claim}: any) => {
     return (
         <MainLayout 
             title="Show Claim"

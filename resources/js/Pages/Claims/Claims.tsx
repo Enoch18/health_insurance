@@ -5,9 +5,8 @@ import CustomTabs from '@/Components/Common/CustomTabs';
 import Table from '@/Components/Common/Table';
 import { FaEye } from 'react-icons/fa';
 import { Link } from '@inertiajs/react';
-import { FaArrowRight } from 'react-icons/fa6';
 
-const Claims = () => {
+const Claims = ({claims}:any) => {
     const tabs = [
         {value: 'all', label: 'All'},
         {value: 'pending', label: 'Pending'},
@@ -20,18 +19,12 @@ const Claims = () => {
         {id: 'claim_number', label: 'Claim Number'},
         {id: 'policy_holder', label: 'Policy Holder'},
         {id: 'policy_number', label: 'Policy Number'},
-        {id: 'claim_type', label: 'Claim Type'},
         {id: 'claim_date', label: 'Claim Date'},
-        {id: 'claim_amount', label: 'Claim Amount'},
-        {id: 'amount_approved', label: 'Amount Approved'},
-        {id: 'submission_method', label: 'Submission Method'},
+        {id: 'total_claim_amount', label: 'Total Claim Amount'},
+        {id: 'approved_amount', label: 'Approved Amount'},
         {id: 'status', label: 'Status'},
         {id: 'action', label: ''},
     ];
-
-    const rows = [
-        {claim_number: '7872342', policy_holder: 'Enock D Soko', policy_number: '9898345', claim_type: 'Out Patient', claim_date: '10 Sep 2024', claim_amount: '$10', amount_approved: '$10', submission_method: 'Online', status: 'Approved', action: (<div className='flex flex-row items-center gap-3'><Link href={`/claims-management/claims/1`} className='border p-1 rounded'><FaEye className='text-xl text-blue-500' /></Link></div>)}
-    ]
 
     return (
         <MainLayout 
@@ -43,7 +36,24 @@ const Claims = () => {
             
             <Table 
                 headers={headers} 
-                rows={rows} 
+                rows={claims?.data?.map((item:any) => (
+                    {
+                        claim_number: item?.claim_number,
+                        policy_holder: `${item?.policy_holder?.first_name} ${item?.policy_holder?.last_name}`,
+                        policy_number: item?.policy_holder?.policy_number,
+                        claim_date: item?.claim_date,
+                        total_claim_amount: item?.total_claimed_amount,
+                        approved_amount: item?.approved_amount,
+                        status: item?.status,
+                        action: (
+                            <div className='flex flex-row items-center gap-3'>
+                                <Link href={`/claims-management/claims/${item?.id}`} className='border p-1 rounded'>
+                                    <FaEye className='text-xl text-blue-500' />
+                                </Link>
+                            </div>
+                        )
+                    }
+                ))} 
                 paperClassName='mt-3' 
             />
         </MainLayout>
