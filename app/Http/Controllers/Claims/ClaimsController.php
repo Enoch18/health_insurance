@@ -10,6 +10,7 @@ use App\Models\Administrations\Service;
 use App\Models\PolicyHolders\PolicyHolder;
 use App\Models\Claims\Claim;
 use App\Models\Claims\ClaimService;
+use App\Http\Resources\Claims\ClaimsResource;
 
 class ClaimsController extends Controller
 {
@@ -84,7 +85,7 @@ class ClaimsController extends Controller
     {
         $claim = Claim::with(['policyHolder'])->find($id);
         return Inertia::render('Claims/ShowClaim', [
-            'claim' => $claim
+            'claim' => new ClaimsResource($claim)
         ]);
     }
 

@@ -55,6 +55,7 @@ const Claims = ({claims}:any) => {
                     }
                 ))} 
                 paperClassName='mt-3' 
+                hideCheckbox={true}
             />
         </MainLayout>
     )

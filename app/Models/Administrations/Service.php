@@ -4,6 +4,7 @@ namespace App\Models\Administrations;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Claims\ClaimService;
 
 class Service extends Model
 {
@@ -17,5 +18,9 @@ class Service extends Model
 
     public function benefit(){
         return $this->belongsTo(BenefitPackage::class, 'benefit_package_id');
+    }
+
+    public function claimServices(){
+        return $this->belongsTo(ClaimService::class, 'service_id');
     }
 }

@@ -17,7 +17,7 @@ const CustomTabs = ({tabs, defaultValue}: Props) => {
             <div className="w-[300px]">
                 <TextInput 
                     className="w-[100%] h-10"
-                    placeholder="Search by Policy #"
+                    placeholder="Search..."
                 />
             </div>
 

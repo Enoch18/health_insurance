@@ -67,6 +67,7 @@ const PolicyHolders = ({policy_holders}: any) => {
                     }
                 ))} 
                 paperClassName='mt-3' 
+                hideCheckbox={true}
             />
         </MainLayout>
     )
