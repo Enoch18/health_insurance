@@ -10,6 +10,18 @@ class MedicalInformation extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'medicable_id',
+        'medicable_type',
+        'condition',
+        'medical_history_notes',
+        'primary_physician',
+        'physician_phone',
+        'physician_email',
+        'last_checkup_date',
+        'status'
+    ];
+
     public function medicable(): MorphTo
     {
         return $this->morphTo();

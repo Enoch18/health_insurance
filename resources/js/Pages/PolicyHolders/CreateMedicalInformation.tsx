@@ -23,6 +23,7 @@ const CreateMedicalInformation = ({policy_holder}: Props) => {
                 dependants={policy_holder?.dependants}
                 dependantIndex={dependantIndex}
                 setDependantIndex={setDependantIndex}
+                policy_holder={policy_holder}
             />
         </MainLayout>
     )
