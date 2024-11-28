@@ -62,15 +62,10 @@ class PolicyHoldersController extends Controller
             $insurance_types = InsuranceType::get();
             $coverage_levels = CoverageLevel::where('insurance_type_id', '=', 1)->get();
 
-            return Inertia::render('PolicyHolders/CreatePolicyHolder', [
-                'coverage_periods' => $coverage_periods,
-                'insurance_types' => $insurance_types,
-                'coverage_levels' => $coverage_levels,
-                'errors' => [
-                    'detailed_error' => $e->getMessage(),
-                    'error' => 'An error occurred while trying to save policy holder. Please try again later.',
-                ],
-            ])->with('error', 'An error occurred ' . $e->getMessage());
+            return redirect()->back()->withErrors([
+                'detailed_error' => $e->getMessage(),
+                'error' => 'An error occurred while trying to save. Please try again later.',
+            ]);
             return response()->json(['error' => 'An error occurred while trying to save policy holder!']);
         }
     }

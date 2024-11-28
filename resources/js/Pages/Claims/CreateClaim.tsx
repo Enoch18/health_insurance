@@ -73,7 +73,7 @@ const CreateClaim = ({policy_holders, services}:any) => {
         >
             <TopHeaderSection title='Add New Claim' hideAddBtn={true} />
 
-            {error !== "" && <Alert severity="error" className="mb-2">{error}</Alert>}
+            {error !== "" && error !== undefined &&  <Alert severity="error" className="mb-2">{error}</Alert>}
 
             <Paper>
                 <form onSubmit={onSubmit}>

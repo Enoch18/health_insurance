@@ -9,6 +9,7 @@ interface Props{
 }
 
 const MedicalInformation = ({policy_holder, policy_holder_medicals, dependant_medicals}: Props) => {
+    console.log(dependant_medicals)
     return (
         <PolicyHolderLayout policy_holder={policy_holder?.data}>
             <h2 className="text-lg font-bold">Family Medical Information</h2><hr className="border-gray-500" />
@@ -17,7 +18,7 @@ const MedicalInformation = ({policy_holder, policy_holder_medicals, dependant_me
                 <h4 className="font-semibold text-blue-300">{policy_holder_medicals.policy_holder}</h4>
                 
                 {policy_holder_medicals?.medicals?.map((medicalItem: any, medIndex: number) => (
-                    <SingleMedicalInfo item={medicalItem} key={medIndex} />
+                    <SingleMedicalInfo item={medicalItem} policy_holder_id={policy_holder.data.id} key={medIndex} />
                 ))}
             </div>
 
@@ -28,7 +29,7 @@ const MedicalInformation = ({policy_holder, policy_holder_medicals, dependant_me
                             <h4 className="font-semibold text-blue-300 mt-3">{item.dependant}</h4>
                             
                             {item?.medicals?.map((medicalItem: any, medIndex: number) => (
-                                <SingleMedicalInfo item={medicalItem} key={medIndex} />
+                                <SingleMedicalInfo item={medicalItem} policy_holder_id={policy_holder.data.id} key={medIndex} />
                             ))}
                         </div>
                     ))}

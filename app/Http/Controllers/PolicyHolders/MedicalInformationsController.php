@@ -49,6 +49,7 @@ class MedicalInformationsController extends Controller
             'medicals' => 'required|array',
             'medicals.*.dependant_id' => 'nullable|sometimes|integer',
             'medicals.*.policy_holder_id' => 'nullable|sometimes|integer',
+            'medicals.*.condition' => 'nullable|sometimes|string',
             'medicals.*.medical_history_notes' => 'nullable|sometimes|string',
             'medicals.*.primary_physician' => 'nullable|sometimes|string',
             'medicals.*.physician_phone' => 'nullable|sometimes|string',
@@ -58,7 +59,7 @@ class MedicalInformationsController extends Controller
         ]);
 
         try{
-            // \DB::beginTransaction();
+            \DB::beginTransaction();
             foreach($request->medicals as $medical){
                 $dependant_id = isset($medical['dependant_id']) && $medical['dependant_id'] != '' ? $medical['dependant_id'] : null;
                 $policy_holder_id = isset($medical['policy_holder_id']) && $medical['policy_holder_id'] != '' ? $medical['policy_holder_id'] : null;
@@ -75,7 +76,8 @@ class MedicalInformationsController extends Controller
                 $no_medical_condition = isset($medical['no_medical_condition']) ? 'No medical condition' : null;
 
                 $individual->medicals()->create([
-                    'medical_history_notes' => isset($medical['medical_history_notes']) && $medical['medical_history_notes'] != null ? $medical['medical_history_notes'] : $no_medical_condition,
+                    'condition' => isset($medical['condition']) && $medical['condition'] != null ? $medical['condition'] : $no_medical_condition,
+                    'medical_history_notes' => isset($medical['medical_history_notes']) && $medical['medical_history_notes'] != null ? $medical['medical_history_notes'] : null,
                     'primary_physician' => isset($medical['primary_physician']) && $medical['primary_physician'] != null ? $medical['primary_physician'] : null,
                     'physician_phone' => isset($medical['physician_phone']) && $medical['physician_phone'] != null ? $medical['physician_phone'] : null,
                     'physician_email' => isset($medical['physician_email']) && $medical['physician_email'] != null ? $medical['physician_email'] : null,
@@ -83,35 +85,16 @@ class MedicalInformationsController extends Controller
                     'status' => isset($medical['status']) && $medical['status'] != null ? $medical['status'] : 'ongoing'
                 ]);
             }
-            // \DB::commit();
+            \DB::commit();
         }catch(\Exception $e){
             \DB::rollBack();
             $policy_holder = PolicyHolder::with('dependants')->find($policy_holder_id);
 
-            return Inertia::render('PolicyHolders/CreateMedicalInformation', [
-                'policy_holder' => $policy_holder,
-                'errors' => [
-                    'detailed_error' => $e->getMessage(),
-                    'error' => 'An error occurred while trying to save claim. Please try again later.',
-                ],
-            ])->with('error', 'An error occurred ' . $e->getMessage());
+            return redirect()->back()->withErrors([
+                'detailed_error' => $e->getMessage(),
+                'error' => 'An error occurred while trying to save. Please try again later.',
+            ]);
         }
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $policy_holder_id, string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $policy_holder_id, string $id)
-    {
-        //
     }
 
     /**
@@ -119,15 +102,48 @@ class MedicalInformationsController extends Controller
      */
     public function update(Request $request, string $policy_holder_id, string $id)
     {
-        //
-    }
+        $request->validate([
+            'dependant_id' => 'nullable|sometimes|integer',
+            'policy_holder_id' => 'nullable|sometimes|integer',
+            'condition' => 'required|string',
+            'medical_history_notes' => 'required|string',
+            'primary_physician' => 'required|string',
+            'physician_phone' => 'required|string',
+            'physician_email' => 'required|string',
+            'last_checkup_date' => 'required|string',
+            'status' => 'required|string',
+        ]);
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $policy_holder_id, string $id)
-    {
-        //
+        try{
+            \DB::beginTransaction();
+            $individual = null;
+            if($request->dependant_id){
+                $individual = Dependant::find($request->dependant_id);
+            }
+
+            if($request->policy_holder_id){
+                $individual = PolicyHolder::find($request->policy_holder_id);
+            }
+
+            $individual->medicals()->where('id', '=', $id)->update([
+                'condition' => $request->condition,
+                'medical_history_notes' => $request->medical_history_notes,
+                'primary_physician' => $request->primary_physician,
+                'physician_phone' => $request->physician_phone,
+                'physician_email' => $request->physician_email,
+                'last_checkup_date' => $request->last_checkup_date,
+                'status' => $request->status
+            ]);
+            \DB::commit();
+        }catch(\Exception $e){
+            \DB::rollBack();
+            $policy_holder = PolicyHolder::with('dependants')->find($policy_holder_id);
+
+            return redirect()->back()->withErrors([
+                'detailed_error' => $e->getMessage(),
+                'error' => 'An error occurred while trying to save. Please try again later.',
+            ]);
+        }
     }
 
     private function dependantMedicals($dependants){
@@ -136,15 +152,17 @@ class MedicalInformationsController extends Controller
             return collect([
                 'dependant_id' => $item->id, 
                 'dependant' => $item->first_name . ' ' . $item->last_name,
-                'medicals' => $medical_informations->map(function($medical){
+                'medicals' => $medical_informations->map(function($medical) use($item){
                     return collect([
                         'id' => $medical->id,
+                        'dependant_id' => $item->id,
                         'condition' => $medical->condition,
                         'allergies' => $medical->allergies,
                         'medical_history_notes' => $medical->medical_history_notes,
                         'medications' => $medical->medications,
                         'primary_physician' => $medical->primary_physician,
                         'physician_email' => $medical->physician_email,
+                        'physician_phone' => $medical->physician_phone,
                         'status' => $medical->status,
                         'last_checkup_date' => $medical->last_checkup_date,
                     ]);
@@ -159,15 +177,17 @@ class MedicalInformationsController extends Controller
         return collect([
             'policy_holder_id' => $policy_holder->id, 
             'policy_holder' => $policy_holder->first_name . ' ' . $policy_holder->last_name,
-            'medicals' => $medical_informations->map(function($medical){
+            'medicals' => $medical_informations->map(function($medical) use($policy_holder){
                 return collect([
                     'id' => $medical->id,
+                    'policy_holder_id' => $policy_holder->id,
                     'condition' => $medical->condition,
                     'allergies' => $medical->allergies,
                     'medical_history_notes' => $medical->medical_history_notes,
                     'medications' => $medical->medications,
                     'primary_physician' => $medical->primary_physician,
                     'physician_email' => $medical->physician_email,
+                    'physician_phone' => $medical->physician_phone,
                     'status' => $medical->status,
                     'last_checkup_date' => $medical->last_checkup_date,
                 ]);

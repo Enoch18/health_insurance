@@ -22,4 +22,8 @@ class Dependant extends Model
     public function policyHolder(): BelongsTo{
         return  $this->belongsTo(PolicyHolder::class, 'policy_holder_id');
     }
+
+    public function exclusions(): MorphMany{
+        return  $this->morphMany(Exclusion::class, 'exclusionable');
+    }
 }

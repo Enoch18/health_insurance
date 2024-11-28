@@ -67,14 +67,10 @@ class ClaimsController extends Controller
             \DB::commit();
         }catch(\Exception $e){
             \DB::rollBack();
-            return Inertia::render('Claims/CreateClaim', [
-                'policy_holders' => PolicyHolder::all(),
-                'services' => Service::all(),
-                'errors' => [
-                    'detailed_error' => $e->getMessage(),
-                    'error' => 'An error occurred while trying to save claim. Please try again later.',
-                ],
-            ])->with('error', 'An error occurred ' . $e->getMessage());
+            return redirect()->back()->withErrors([
+                'detailed_error' => $e->getMessage(),
+                'error' => 'An error occurred while trying to save. Please try again later.',
+            ]);
         }
     }
 

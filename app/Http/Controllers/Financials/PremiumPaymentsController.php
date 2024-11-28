@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Financials;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\PolicyHolders\PremiumPayment;
 
 use Inertia\Inertia;
 
@@ -14,7 +15,10 @@ class PremiumPaymentsController extends Controller
      */
     public function index()
     {
-        return Inertia::render('Financials/PremiumPayments');
+        $premium_payments = PremiumPayment::paginate(50);
+        return Inertia::render('Financials/PremiumPayments', [
+            'premium_payments' => $premium_payments
+        ]);
     }
 
     /**

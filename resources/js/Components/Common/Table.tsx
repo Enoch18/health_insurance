@@ -10,9 +10,10 @@ interface Props{
     headers: HeadersProps[];
     rows: any[],
     hideCheckbox?: boolean;
+    not_found?: string;
 }
 
-const Table = ({paperClassName, headers, rows, hideCheckbox}: Props) => {
+const Table = ({paperClassName, headers, rows, hideCheckbox, not_found}: Props) => {
     return (
         <div className={`relative overflow-x-auto shadow-md ${paperClassName}`}>
             <div className="hidden md:block">
@@ -81,7 +82,7 @@ const Table = ({paperClassName, headers, rows, hideCheckbox}: Props) => {
             
             {rows.length === 0 && (
                 <div className="p-2 flex items-center justify-center">
-                    <p>No items found!</p>
+                    <p>{not_found ?? 'No items found!'}</p>
                 </div>
             )}
         </div>

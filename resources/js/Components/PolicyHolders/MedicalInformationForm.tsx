@@ -206,7 +206,7 @@ const MedicalInformationForm = ({name, individual_type, id_type, id, policy_hold
                     </label>
                 )}
 
-                {error !== "" && <Alert severity="error" className="mb-2">{error}</Alert>}
+                {error !== "" && error !== undefined && <Alert severity="error" className="mb-2">{error}</Alert>}
                 <div className="mt-3">
                     {!hideForm && (
                         <form ref={formRef}>
@@ -362,8 +362,8 @@ const MedicalInformationForm = ({name, individual_type, id_type, id, policy_hold
             </Paper>
 
             <CustomModal
-             open={open}
-             setOpen={() => {}}
+                open={open}
+                setOpen={setOpen}
             >
                 <div className="flex flex-col items-center justify-center">
                     <FaCheckCircle className="text-5xl text-green-300" />

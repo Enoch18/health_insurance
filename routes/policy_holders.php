@@ -16,5 +16,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
         Route::resource('/medical-information', MedicalInformationsController::class);
         Route::resource('/financials', FinancialsController::class);
         Route::resource('/policy-holder-benefits', PolicyHolderBenefitsController::class);
+        Route::resource('/underwriting', UnderwritingsController::class);
+        Route::resource('/exclusions', ExclusionsController::class);
     });
 });
