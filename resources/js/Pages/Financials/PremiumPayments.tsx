@@ -3,9 +3,22 @@ import MainLayout from "@/Layouts/MainLayout"
 import TopHeaderSection from '@/Components/Common/TopHeaderSection';
 import CustomTabs from '@/Components/Common/CustomTabs';
 import Table from '@/Components/Common/Table';
-import { FaEye } from 'react-icons/fa';
+import { useAddEdit } from '@/Hooks/useAddEdit';
+import CustomModal from '@/Components/Common/CustomModal';
+import CustomTextInput from '@/Components/Common/CustomTextInput';
 
 const PremiumPayments = ({premium_payments}: any) => {
+    const {
+        open, setOpen,
+        values, setValues,
+        is_editing, setIsEditing,
+        setItemId,
+        submitting,
+        errors,
+        handleChange,
+        onSubmit
+    } = useAddEdit(`/financials/premium-payments`);
+
     const tabs = [
         {label: 'All'},
         {label: 'Pending'},
@@ -29,12 +42,6 @@ const PremiumPayments = ({premium_payments}: any) => {
         {id: 'action', label: ''},
     ];
 
-    const rows = [
-        {payment_id: '7872342', policy: 'Health Insurance', policy_number: '9898345', payment_date: '10 Sep 2024', payment_overdue_date: '10 Sep 2024', status: 'Approved', action: <button><FaEye /></button>}
-    ]
-
-    console.log(premium_payments.data)
-
     return (
         <MainLayout 
             title="Policy Holders"
@@ -47,9 +54,9 @@ const PremiumPayments = ({premium_payments}: any) => {
                 headers={headers} 
                 rows={premium_payments.data?.map((item:any) => (
                     {
-                        transaction_number: item.transaction_reference ?? '2898734',
-                        policy_number: 'POL95407394',
-                        policy_holder: 'Lydia Soko',
+                        transaction_number: item.transaction_reference,
+                        policy_number: item.policy_holder.policy_number,
+                        policy_holder: `${item.policy_holder.first_name} ${item.policy_holder.last_name}`,
                         payment_date: item.payment_date ?? 'N/A',
                         description: item.description,
                         currency: item.currency,
@@ -58,12 +65,48 @@ const PremiumPayments = ({premium_payments}: any) => {
                         due_date: item.due_date,
                         payment_status: item.payment_status,
                         action: (
-                            <button className='bg-green-500 text-white rounded p-1'>Process</button>
+                            <>
+                                {item.amount_due > 0 && (
+                                    <button 
+                                        onClick={() => {
+                                            setOpen(true);
+                                            setItemId(item.id);
+                                            setIsEditing(true);
+                                            setValues({amount_paid: item.amount_due});
+                                        }} 
+                                        className='bg-green-500 text-white rounded p-1'
+                                    >
+                                        Process
+                                    </button>
+                                )}
+                            </>
                         )
                     }
                 ))} 
                 paperClassName='mt-3' 
             />
+
+            <CustomModal
+                open={open}
+                setOpen={setOpen}
+            >
+                <h4 className="text-lg mb-2">{is_editing ? 'Edit Benefit Package' : 'Add Benefit Package'}</h4><hr />
+
+                <form onSubmit={onSubmit}>
+                    <CustomTextInput 
+                        id={'amount_paid'} 
+                        name="amount_paid"
+                        label='Pay' 
+                        setValue={handleChange} 
+                        value={values?.amount_paid} 
+                        error={errors?.amount_paid}
+                    />
+
+                    <button className='bg-blue-500 text-white px-5 py-2 rounded mt-3' disabled={submitting}>
+                        {submitting ? 'Submiting...' : 'Submit'}
+                    </button>
+                </form>
+            </CustomModal>
         </MainLayout>
     )
 }

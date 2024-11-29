@@ -8,12 +8,12 @@ import Table from "@/Components/Common/Table";
 import AssessService from "@/Components/Claims/AssessService";
 import { usePage } from "@inertiajs/react";
 import CompleteAssessment from "@/Components/Claims/CompleteAssessment";
+import { useAddEdit } from "@/Hooks/useAddEdit";
 
 const ShowClaim = ({claim}: any) => {
     const [openServiceAssess, setOpenServiceAssess] = useState(false);
     const [openCompleteAssessment, setOpenCompleteAssessment] = useState(false);
 
-    const [values, setValues] = useState({});
     const [title, setTitle] = useState("");
 
     const serviceTableHeadings = [
@@ -25,20 +25,17 @@ const ShowClaim = ({claim}: any) => {
         {label: '', id: 'action'},
     ];
 
-    const { errors } = usePage().props;
-
-    function handleChange(e:any) {
-        const key = e.target.id;
-        const value = e.target.value
-        setValues((values:any) => ({
-            ...values,
-            [key]: value,
-        }))
-    }
-
-    const onSubmit = (e:any) => {
-        e.preventDefault();
-    }
+    const {
+        open, setOpen,
+        values, setValues,
+        setIsEditing,
+        is_editing,
+        setItemId,
+        submitting,
+        errors,
+        handleChange,
+        onSubmit
+    } = useAddEdit(`/claims-management/claim-services`);
 
     return (
         <MainLayout 
@@ -90,7 +87,15 @@ const ShowClaim = ({claim}: any) => {
                         approved_amount: item.approved_amount,
                         rejected_amount: item.rejected_amount,
                         action: (
-                            <button onClick={() => {setOpenServiceAssess(true); setTitle(item.service)}} className="bg-orange-700 text-white px-2 py-1 rounded shadow">
+                            <button 
+                                onClick={() => {
+                                    setOpen(true); 
+                                    setItemId(item.id); 
+                                    setIsEditing(true);
+                                    setValues({approved_amount: item.claim_amount, rejected_amount: 0})
+                                }} 
+                                className="bg-orange-700 text-white px-2 py-1 rounded shadow"
+                            >
                                 Assess
                             </button>
                         )
@@ -101,8 +106,8 @@ const ShowClaim = ({claim}: any) => {
 
             <AssessService
                 title={title}
-                open={openServiceAssess}
-                setOpen={setOpenServiceAssess}
+                open={open}
+                setOpen={setOpen}
                 handleChange={handleChange}
                 onSubmit={onSubmit}
                 values={values}

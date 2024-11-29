@@ -25,3 +25,7 @@ Route::middleware([
     
     Route::get('/contact-support', [ContactSupportsController::class, 'index'])->name('contact-support.index');
 });
+
+Route::get('/premium-price', function(){
+    
+});

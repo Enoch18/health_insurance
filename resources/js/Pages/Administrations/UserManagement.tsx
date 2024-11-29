@@ -3,7 +3,6 @@ import MainLayout from "@/Layouts/MainLayout"
 import TopHeaderSection from '@/Components/Common/TopHeaderSection';
 import Table from '@/Components/Common/Table';
 import { Link, usePage } from '@inertiajs/react';
-import { FaEdit, FaEye } from 'react-icons/fa';
 import { ToastContext } from '@/Contexts/ToastContext';
 import CustomModal from '@/Components/Common/CustomModal';
 import CustomTextInput from '@/Components/Common/CustomTextInput';
@@ -11,12 +10,13 @@ import CustomSelectBox from '@/Components/Common/CustomSelectbox';
 import { router } from '@inertiajs/core';
 import useRoute from '@/Hooks/useRoute';
 import Breadcrumbs from '@/Components/Common/Breadcrumbs';
+import { Alert } from '@mui/material';
 
 const UserManagement = ({users, roles}: any) => {
     const [open, setOpen] = useState(false);
-    const [id, setId] = useState('');
     const [submitting, setSubmitting] = useState(false);
     const {setType, setMessage} = useContext(ToastContext);
+    const [error, setError] = useState("");
 
     const route = useRoute();
 
@@ -49,10 +49,19 @@ const UserManagement = ({users, roles}: any) => {
 
     const onSubmit = (e:any) => {
         e.preventDefault();
-
+        setSubmitting(true);
         router.post(route('users-management.store'), values, {
             onSuccess: () => {
-                console.log('success');
+                setSubmitting(false);
+                setOpen(false);
+                setMessage("User added successfully!");
+                setType("success");
+            },
+            onError: (error) => {
+                setError(error?.error);
+            },
+            onFinish: () => {
+                setSubmitting(false);
             }
         });
     }
@@ -74,30 +83,10 @@ const UserManagement = ({users, roles}: any) => {
                     {
                         id: item.id,
                         name: item.name,
-                        email: item.email,
-                        action: (
-                            <div className='flex flex-row items-center gap-3'>
-                                <Link className='border p-1 rounded' href={`#`}>
-                                    <FaEye className='text-blue-500 text-xl' />
-                                </Link>
-
-                                <button 
-                                    onClick={() => {
-                                        setOpen(true);
-                                        setId(item.id);
-                                        setValues({
-                                            name: item.name,
-                                            email: item.email,
-                                            role: item.role,
-                                        });
-                                    }} 
-                                    className='border p-1 rounded'>
-                                    <FaEdit className='text-green-500 text-xl' />
-                                </button>
-                            </div>
-                        )
+                        email: item.email
                     }
                 ))}
+                hideCheckbox={true}
             />
 
             <CustomModal
@@ -106,6 +95,7 @@ const UserManagement = ({users, roles}: any) => {
             >
                 <form onSubmit={onSubmit}>
                     <h4 className='text-xl'>Add User</h4><hr />
+                    {error !== "" && error !== undefined && <Alert severity="error" className="mb-2">{error}</Alert>}
                     <CustomTextInput 
                         id={'name'} 
                         name="name" 
@@ -123,14 +113,14 @@ const UserManagement = ({users, roles}: any) => {
                         error={errors.email}
                     />
                     <CustomSelectBox 
-                        id={'role'} 
-                        name="role" 
+                        id={'role_id'} 
+                        name="role_id" 
                         label='Role' 
                         data={roles.map((item:any) => (
                             {label: item.name, value: item.id}
                         ))} 
                         setValue={handleChange} 
-                        value={values.role} 
+                        value={values.role_id} 
                         error={errors.role_id}
                     />
 

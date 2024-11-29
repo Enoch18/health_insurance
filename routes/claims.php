@@ -8,4 +8,5 @@ Route::prefix('/claims-management')->middleware(['auth:sanctum', config('jetstre
     Route::resource('/claims', ClaimsController::class)->names([
         'index' => 'claims.index'
     ]);
+    Route::resource('/claim-services', ClaimServicesController::class);
 });

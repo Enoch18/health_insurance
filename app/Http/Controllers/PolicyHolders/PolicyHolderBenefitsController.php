@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\PolicyHolders\PolicyHolder;
 use App\Http\Resources\PolicyHolders\PolicyHoldersResource;
 use Inertia\Inertia;
+use App\Models\Administrations\BenefitPackage;
 
 class PolicyHolderBenefitsController extends Controller
 {
@@ -16,8 +17,10 @@ class PolicyHolderBenefitsController extends Controller
     public function index(string $policy_holder_id)
     {
         $policy_holder = PolicyHolder::find($policy_holder_id);
+        $benefits = BenefitPackage::all();
         return Inertia::render('PolicyHolders/PolicyHolderBenefits', [
-            'policy_holder' => new PolicyHoldersResource($policy_holder)
+            'policy_holder' => new PolicyHoldersResource($policy_holder),
+            'benefits' => $benefits
         ]);
     }
 

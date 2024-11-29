@@ -46,14 +46,17 @@ class UnderwritingsController extends Controller
         try{        
             \DB::beginTransaction(); 
             $underwriting = UnderwritingAssessment::create($request->all());
-            PremiumPayment::create([
-                'policy_holder_id' => $request->policy_holder_id,
-                'due_date' => date('y-m-d'),
-                'amount_due' => 150,
-                'amount_paid' => 0,
-                'currency' => 'USD',
-                'description' => "Premium Payment",
-            ]);
+            if($request->status == 'accepted'){
+                PremiumPayment::create([
+                    'policy_holder_id' => $request->policy_holder_id,
+                    'transaction_reference' => $this->uniqueTransactionReference(),
+                    'due_date' => date('y-m-d'),
+                    'amount_due' => $this->premiumRate($policy_holder_id),
+                    'amount_paid' => 0,
+                    'currency' => 'USD',
+                    'description' => "Premium Payment",
+                ]);
+            }
             \DB::commit();
         }catch(\Exception $e){
             \DB::rollBack();
@@ -66,27 +69,53 @@ class UnderwritingsController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $policy_holder_id, string $id)
-    {
-        //
+    private function premiumRate($policy_holder_id){
+        $age_ranges = \App\Models\Administrations\CoverageAgeRange::all();
+
+        // Policy Holder
+        $policyHolder = \App\Models\PolicyHolders\PolicyHolder::find($policy_holder_id);
+
+        $age = \Carbon\Carbon::parse($policyHolder->date_of_birth)->age;
+
+        // Getting the age range
+        $age_range = null;
+        foreach($age_ranges as $item){
+            if($age >= $item->min_age && $age <= $item->max_age){
+                $age_range = $item;
+            }
+        }
+
+        $coverage_level_id = $policyHolder->coverages()->where('status', '=', 'active')->first()?->coverage_level_id;
+
+        // Premium Rates
+        $premium_rates = \App\Models\Administrations\PremiumRate::where('coverage_level_id', '=', $coverage_level_id)
+                            ->where('coverage_age_range_id', '=', $coverage_level_id)
+                            ->orderBy('created_at', 'desc')
+                            ->first();
+        return $premium_rates?->individual_price;
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $policy_holder_id, string $id)
-    {
-        //
+    
+    /*
+    Generating a unique transaction number
+    */
+    public function uniqueTransactionReference(){
+        do {
+            // Generate a random policy number
+            $transactionReference = $this->generateRandomtransactionReference();
+        } while ($this->transactionReferenceExists($transactionReference));
+
+        return $transactionReference;
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $policy_holder_id, string $id)
-    {
-        //
+    private function generateRandomtransactionReference(){
+        // Generate a random 8-digit number
+        $randomNumber = str_pad(rand(0, 99999999), 8, '0', STR_PAD_LEFT);
+        return $randomNumber; // Prefix with "POL"
+    }
+
+    private function transactionReferenceExists($transactionReference){
+        // Check if the policy number already exists in the database
+        return PremiumPayment::where('transaction_reference', $transactionReference)->exists();
     }
 }

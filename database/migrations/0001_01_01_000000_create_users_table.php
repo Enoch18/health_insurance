@@ -47,6 +47,13 @@ return new class extends Migration
             'email' => 'sokoenock@gmail.com',
             'password' => Hash::make('Enock@123'),
         ]);
+
+        User::create([
+            'name' => 'Enock Soko',
+            'role_id' => 1,
+            'email' => 'admin@test.com',
+            'password' => Hash::make('Admin@123'),
+        ]);
     }
 
     /**

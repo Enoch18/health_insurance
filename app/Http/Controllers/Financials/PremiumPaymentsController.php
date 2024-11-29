@@ -15,42 +15,10 @@ class PremiumPaymentsController extends Controller
      */
     public function index()
     {
-        $premium_payments = PremiumPayment::paginate(50);
+        $premium_payments = PremiumPayment::with(['policyHolder'])->paginate(50);
         return Inertia::render('Financials/PremiumPayments', [
             'premium_payments' => $premium_payments
         ]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
     }
 
     /**
@@ -58,7 +26,14 @@ class PremiumPaymentsController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'amount_paid' => 'required|numeric'
+        ]);
+        $payment = PremiumPayment::find($id);
+        $payment->amount_paid = $request->amount_paid;
+        $payment->amount_due = 0;
+        $payment->payment_status = 'paid';
+        $payment->save();
     }
 
     /**
