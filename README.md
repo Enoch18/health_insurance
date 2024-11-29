@@ -74,29 +74,6 @@ Access the system at `http://localhost:8000`.
 
 ---
 
-## Screenshots
-Include screenshots of the following:
-1. **Login Page**
-2. **Dashboard**
-3. **Policy Management Page**
-4. **Claims Page**
-5. **Payment Page**
-
-(Screenshots to be added here.)
-
----
-
-## ERD and Database Relationships
-The Entity Relationship Diagram (ERD) and database relationship diagram showcase the system's data structure, including:
-- Users and their roles
-- Policies
-- Claims
-- Payments
-
-(Diagrams to be included here.)
-
----
-
 ## Development Methodology
 This project utilized the Agile methodology to ensure iterative development, early stakeholder feedback, and continuous improvements.
 
