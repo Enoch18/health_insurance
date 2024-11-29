@@ -15,12 +15,11 @@ This project is a comprehensive Health Insurance Management System developed for
 ## Requirements
 To run this system, ensure you have the following installed:
 
-1. **Node.js** (v16 or above)
-2. **PHP** (v8.0 or above)
+1. **Node.js** (v21 or above)
+2. **PHP** (v8.3 or above)
 3. **Composer** (latest version)
-4. **MySQL** (v8.0 or above)
-5. **Laravel** (v10)
-6. **npm** (v7 or above)
+5. **Laravel** (v11)
+6. **npm** (v10 or above)
 
 ---
 
@@ -29,7 +28,7 @@ Follow these steps to set up and run the system:
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/your-repo/health-insurance-management-system.git
+git clone https://github.com/Enoch18/health_insurance.git
 cd health-insurance-management-system
 ```
 
