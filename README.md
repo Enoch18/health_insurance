@@ -29,7 +29,7 @@ Follow these steps to set up and run the system:
 ### 1. Clone the Repository
 ```bash
 git clone https://github.com/Enoch18/health_insurance.git
-cd health-insurance-management-system
+cd health_insurance
 ```
 
 ### 2. Install Backend Dependencies
