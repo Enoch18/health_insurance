@@ -11,7 +11,7 @@ const InsuranceSetups = ({insurance_type_id, insurance_type}:any) => {
     const route = useRoute();
 
     const links = [
-        {label: 'Coverage Levels', icon: <FaTrophy className='text-5xl' />, route: `/administrations/insurance-types/${insurance_type_id}/coverage-levels`},
+        {label: 'Schemes/Coverage Levels', icon: <FaTrophy className='text-5xl' />, route: `/administrations/insurance-types/${insurance_type_id}/coverage-levels`},
         {label: 'Benefits Packages', icon: <FaGift className='text-5xl' />, route: `/administrations/insurance-types/${insurance_type_id}/benefit-packages`},
         {label: 'Claim Categories', icon: <FaTags className='text-5xl' />, route: `/administrations/insurance-types/${insurance_type_id}/claim-categories`},
         {label: 'Policy Years', icon: <FaHourglassHalf className='text-5xl' />, route: `/administrations/insurance-types/${insurance_type_id}/policy-years`},

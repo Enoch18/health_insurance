@@ -19,7 +19,7 @@ class ClaimsController extends Controller
      */
     public function index()
     {
-        $claims = Claim::with(['policyHolder'])->paginate(50);
+        $claims = Claim::with(['policyHolder'])->orderBy('created_at', 'DESC')->paginate(50);
         return Inertia::render('Claims/Claims', [
             'claims' => $claims
         ]);

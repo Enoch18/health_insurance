@@ -15,7 +15,7 @@ export default function Dashboard() {
     {label: 'Number of Active Policies', value: '1,520', icon: <FaFileAlt className='text-7xl text-gray-200' />, className: 'bg-[#001F3F] p-7 rounded shadow flex flex-row items-center gap-3 cursor-pointer hover:opacity-80'},
     {label: 'Claims in Process', value: '34', icon: <FaSpinner className='text-7xl text-gray-200' />, className: 'bg-[#3A6D8C] p-3 rounded shadow flex flex-row items-center gap-3 cursor-pointer hover:opacity-80'},
     {label: 'Monthly Premium collected', value: '$150,000', icon: <FaDollarSign className='text-7xl text-gray-200' />, className: 'bg-green-600 p-3 rounded shadow flex flex-row items-center gap-3 cursor-pointer hover:opacity-80'},
-    {label: 'Total Payouts', value: '$50,000', icon: <FaHandHoldingDollar className='text-7xl text-gray-200' />, className: 'bg-[#697565] p-3 rounded shadow flex flex-row items-center gap-3 cursor-pointer hover:opacity-80'}
+    {label: 'Approved Claim Amounts', value: '$50,000', icon: <FaHandHoldingDollar className='text-7xl text-gray-200' />, className: 'bg-[#697565] p-3 rounded shadow flex flex-row items-center gap-3 cursor-pointer hover:opacity-80'}
   ];
 
   return (

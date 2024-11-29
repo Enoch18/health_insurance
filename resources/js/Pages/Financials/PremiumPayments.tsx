@@ -47,9 +47,9 @@ const PremiumPayments = ({premium_payments}: any) => {
                 headers={headers} 
                 rows={premium_payments.data?.map((item:any) => (
                     {
-                        transaction_number: item.transaction_reference,
-                        policy_number: 'N/A',
-                        policy_holder: 'N/A',
+                        transaction_number: item.transaction_reference ?? '2898734',
+                        policy_number: 'POL95407394',
+                        policy_holder: 'Lydia Soko',
                         payment_date: item.payment_date ?? 'N/A',
                         description: item.description,
                         currency: item.currency,

@@ -3,7 +3,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-use App\Http\Controllers\Membership\MembersController;
+use App\Http\Controllers\ContactSupportsController;
 
 // Route::get('/', function () {
 //     return Inertia::render('Welcome', [
@@ -22,4 +22,6 @@ Route::middleware([
     Route::get('/', function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
+    
+    Route::get('/contact-support', [ContactSupportsController::class, 'index'])->name('contact-support.index');
 });
