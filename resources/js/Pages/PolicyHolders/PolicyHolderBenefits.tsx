@@ -21,7 +21,7 @@ const PolicyHolderBenefits = ({policy_holder, benefits}: Props) => {
                     {label: 'Code', id: 'code'},
                     {label: 'Description', id: 'description'}
                 ]}
-                rows={benefits}
+                rows={benefits ?? []}
                 hideCheckbox={true}
             />
         </PolicyHolderLayout>
