@@ -46,7 +46,7 @@ const PremiumPayments = ({premium_payments}: any) => {
         <MainLayout 
             title="Policy Holders"
         >
-            <TopHeaderSection title='Premium Payments' />
+            <TopHeaderSection title='Premium Payments' hideAddBtn={true} />
 
             <CustomTabs tabs={tabs} />
             

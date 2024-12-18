@@ -26,7 +26,6 @@ const PolicyHolders = ({policy_holders}: any) => {
         {id: 'last_name', label: 'Last Name'},
         {id: 'date_of_birth', label: 'Date of Birth'},
         {id: 'plan', label: 'Plan'},
-        {id: 'group', label: 'Group'},
         {id: 'join_date', label: 'Join Date'},
         {id: 'status', label: 'Status'},
         {id: 'action', label: ''},
@@ -58,7 +57,6 @@ const PolicyHolders = ({policy_holders}: any) => {
                         last_name: item?.attributes?.last_name, 
                         date_of_birth: item?.attributes?.date_of_birth,
                         plan: item?.attributes?.coverage_level, 
-                        group: 'Corporate', 
                         join_date: item?.attributes?.created_at, 
                         status: item?.attributes?.policy_status, 
                         action: (
