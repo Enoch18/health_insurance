@@ -1,7 +1,7 @@
-# Health Insurance Management System for SES Unisure
+# Health Insurance Management System
 
 ## Overview
-This project is a comprehensive Health Insurance Management System developed for SES Unisure. It is built using Laravel and Inertia with React for the frontend, leveraging modern web development practices to create a robust, efficient, and user-friendly system.
+This project is a comprehensive Health Insurance Management System. It is built using Laravel and Inertia with React for the frontend, leveraging modern web development practices to create a robust, efficient, and user-friendly system.
 
 ### Key Features
 - **Policy Management**: Full CRUD operations for managing insurance policies.
@@ -71,6 +71,12 @@ php artisan db:seed
   ```
 
 Access the system at `http://localhost:8000`.
+
+---
+
+## Login Details
+- Email: admin@test.com
+- Password: Admin@123
 
 ---
 

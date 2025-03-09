@@ -125,7 +125,7 @@ export default function MainLayout({title, children} : PropsWithChildren<Props>)
                             </div>
 
                             <div className="ml-3 relative">
-                                <Link href={route('profile.show')}>
+                                <Link href={"#"}>
                                     <button
                                         type="button"
                                         className="inline-flex items-center"

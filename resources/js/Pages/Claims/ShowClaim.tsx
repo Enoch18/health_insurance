@@ -22,6 +22,7 @@ const ShowClaim = ({claim}: any) => {
         {label: 'Claimed Amount', id: 'claim_amount'},
         {label: 'Approved Amount', id: 'approved_amount'},
         {label: 'Rejected Amount', id: 'rejected_amount'},
+        {label: 'Status', id: 'status'},
         {label: '', id: 'action'},
     ];
 
@@ -86,6 +87,7 @@ const ShowClaim = ({claim}: any) => {
                         claim_amount: item.claim_amount,
                         approved_amount: item.approved_amount,
                         rejected_amount: item.rejected_amount,
+                        status: (item.approved_amount > 0 || item.rejected_amount) ? 'Assessed' : 'Pending',
                         action: (
                             <button 
                                 onClick={() => {
@@ -94,9 +96,9 @@ const ShowClaim = ({claim}: any) => {
                                     setIsEditing(true);
                                     setValues({approved_amount: item.claim_amount, rejected_amount: 0})
                                 }} 
-                                className="bg-orange-700 text-white px-2 py-1 rounded shadow"
+                                className={`${(item.approved_amount > 0 || item.rejected_amount) ? 'bg-green-700' : 'bg-orange-700'} text-white px-2 py-1 rounded shadow`}
                             >
-                                Assess
+                                {(item.approved_amount > 0 || item.rejected_amount) ? "Re-Assess" : "Assess"}
                             </button>
                         )
                     }

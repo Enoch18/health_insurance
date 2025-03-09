@@ -12,7 +12,7 @@ export default function AuthenticationCard({
   return (
     <div className="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100 dark:bg-gray-900">
       <div>
-        <h4 className='text-3xl text-blue-400'>SES Unisure</h4>
+        <h4 className='text-3xl text-blue-400'>Health Insurance</h4>
       </div>
 
       <div className="w-full sm:max-w-md mt-6 px-6 py-4 bg-white dark:bg-gray-800 shadow-md overflow-hidden sm:rounded-lg">
