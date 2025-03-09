@@ -1,1 +1,0 @@
-import{j as a}from"./app.e0868774.js";const d=({children:r})=>a("div",{className:"text-gray-900 dark:text-white dark:bg-gray-800 dark:bg-gradient-to-bl dark:from-gray-700/50 dark:via-transparent dark:border-gray-700 shadow rounded p-3",children:r});export{d as P};

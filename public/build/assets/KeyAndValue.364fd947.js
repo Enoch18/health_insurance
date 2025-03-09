@@ -1,1 +1,0 @@
-import{a as s,j as l}from"./app.e0868774.js";const n=({label:a,value:e})=>s("div",{className:"flex flex-row gap-2",children:[l("p",{className:"font-semibold",children:a}),s("p",{className:"font-normal",children:[": ",e]})]});export{n as K};

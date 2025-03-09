@@ -1,0 +1,1 @@
+import{j as e}from"./app.099c68d2.js";import{q as i}from"./SectionTitle.9b6747f9.js";function n({on:a,className:t,children:r}){return e("div",{className:t,children:e(i,{show:a,leave:"transition ease-in duration-1000","leave-from-class":"opacity-100",leaveTo:"opacity-0",children:e("div",{className:"text-sm text-gray-600 dark:text-gray-400",children:r})})})}export{n as A};
